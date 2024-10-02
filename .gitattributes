@@ -1,0 +1,2 @@
+public/* filter=lfs diff=lfs merge=lfs -text
+public/models/cart.glb filter=lfs diff=lfs merge=lfs -text
