@@ -1,85 +1,137 @@
 "use client";
-import {   useRef, useState  } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 // import { Cart } from "@/components/Cart";
 import { Trailer } from "@/components/Trailer";
 import { Valut } from "@/components/Valut";
 import * as THREE from 'three'
-import { PerformanceMonitor, AccumulativeShadows, RandomizedLight, Environment, Lightformer, Float, OrbitControls  } from '@react-three/drei'
+import { PerformanceMonitor, AccumulativeShadows, RandomizedLight, Environment, Lightformer, Float, OrbitControls, Stage, BakeShadows, Stats, useTexture, Cloud, Loader } from '@react-three/drei'
 import { LayerMaterial, Color, Depth } from 'lamina'
 import useStateStore from "@/stores/stateStore";
+import { Bloom, DepthOfField, EffectComposer, SSAO, ToneMapping, Vignette } from "@react-three/postprocessing";
+import { ToneMappingMode } from "postprocessing";
 
 const Experience = () => {
     const [degraded, degrade] = useState(false);
-    const {colors, activeColor} = useStateStore();
+    const { colors, activeColor } = useStateStore();
     return (
         <div className="h-full w-full bg-black">
+            <Loader />
             <Canvas shadows camera={{ position: [5, 0, 15], fov: 30 }}>
-                <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={4} shadow-bias={-0.0001} />
-                <ambientLight intensity={1.5} />
-                {/* <Cart scale={0.5} position={[0, -1, 0]} rotation={[0, Math.PI/2, 0]}/> */}
-                <Trailer scale={0.5} position={[0, -1, 0]} rotation={[0, Math.PI/2, 0]}/>
-                <Valut  scale={0.5} position={[0, -1, 0]} rotation={[0, Math.PI/2, 0]}/>
-                {/* <AccumulativeShadows position={[0, -1.16, 0]} frames={100} alphaTest={0.9} scale={10}> */}
-                {/*     <RandomizedLight amount={8} radius={10} ambient={0.5} position={[1, 5, -1]} /> */}
-                {/* </AccumulativeShadows> */}
-                <OrbitControls enableZoom={false} enablePan={false}/>
-                {/** PerfMon will detect performance issues */}
-                <PerformanceMonitor onDecline={() => degrade(true)} />
-                {/* Renders contents "live" into a HDRI environment (scene.environment). */}
-                {/* <Environment frames={degraded ? 1 : Infinity} resolution={256} blur={1} environmentIntensity={2.0}> */}
-                {/*     <Lightformers /> */}
-                {/* </Environment> */}
-                <Environment preset="city" environmentIntensity={2.0}/>
+                <hemisphereLight args={[0xffffff, 0xffffff, 2]} color={'blue'} groundColor={'red'} position={[0, 50, 0]} />
+                <pointLight color={'red'} position={[0, 0.5, 0]} intensity={10} />
+                <directionalLight color={'white'} position={[0, 2, 0]} intensity={4} />
+                <ambientLight color={'white'} intensity={0.5} />
+                <directionalLight position={[-1, 2, 1]} intensity={4} color={'red'} castShadow />
+                <fog color={0x00008B} near={2} far={100} attach={'fog'} />
+                <Stats />
+                <BakeShadows />
+                <Stage preset="upfront" center={{ disableX: true, disableZ: true }} environment="studio" adjustCamera={false} >
+                    <Trailer scale={0.8} position={[0, 0, 0]} rotation={[0, 0 , 0]} />
+                    <Valut  scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]}/>
+                </Stage>
+                <Ground />
+                <OrbitControls enableZoom={true} enablePan={false} />
                 <CameraRig />
-
-            <mesh scale={100}>
-                <sphereGeometry args={[1, 64, 64]} />
-                <LayerMaterial side={THREE.BackSide}>
-                    <Color color={colors.filter(color => color.name === activeColor)[0].hex } alpha={1} mode="normal" />
-                    <Depth color={'blue'}  colorB={colors.filter(color => color.name === activeColor)[0].hex } alpha={0.5} mode="normal" near={0} far={300} origin={[100, 100, 100]} />
-                </LayerMaterial>
-            </mesh>
+                <Sky />
+                {/* <EffectComposer></EffectComposer> */}
             </Canvas>
         </div>
     );
 };
+const Sky = () => {
+    const fragShader = `
+            uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+			}
+        `;
+    const vertShader = `
+            varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+        `;
+    const uniforms = {
+        'topColor': { value: new THREE.Color('pink') },
+        'bottomColor': { value: new THREE.Color('darkblue') },
+        'offset': { value: 0 },
+        'exponent': { value: 0.6 }
+    };
+    return (
+        <mesh >
+            <sphereGeometry args={[50, 32, 15]} />
+            <shaderMaterial fragmentShader={fragShader} vertexShader={vertShader} uniforms={uniforms} side={THREE.BackSide} />
+        </mesh >
+    )
+}
+const Ground = () => {
+    const concrete = useTexture({
+        map: "/textures/concrete/hangar_concrete_floor_diff_1k.jpg",
+        roughnessMap: "/textures/concrete/hangar_concrete_floor_arm_1k.jpg",
+        aoMap: "/textures/concrete/hangar_concrete_floor_arm_1k.jpg",
+        metalnessMap: "/textures/concrete/hangar_concrete_floor_arm_1k.jpg",
+        displacementMap: "/textures/concrete/hangar_concrete_floor_disp_1k.jpg",
+        normalMap: "/textures/concrete/hangar_concrete_floor_nor_gl_1k.jpg",
+    })
+
+    for (const key in concrete) {
+        if (concrete.hasOwnProperty(key)) {
+            concrete[key].wrapS = THREE.RepeatWrapping;
+            concrete[key].wrapT = THREE.RepeatWrapping;
+            concrete[key].repeat.set(10, 10);
+        }
+    }
+    // useEffect(() => {
+    // }, [concrete]);
+    return (
+        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.5, 0]}>
+            <planeGeometry args={[100, 100, 1, 1]} />
+            <meshPhysicalMaterial {...concrete} />
+            <pointLight color={'blue'} />
+        </mesh>
+    )
+}
 
 
 function CameraRig({ v = new THREE.Vector3() }) {
+    const { activeSection } = useStateStore();
+    let xOffset = 0;
+    let zOffset = 0;
     return useFrame((state) => {
-        const t = state.clock.elapsedTime
-        // state.camera.position.lerp(v.set(Math.sin(t / 5), 0, 12 + Math.cos(t / 5) / 2), 0.05)
+        const t = state.clock.elapsedTime;
+        switch (activeSection) {
+            case 0: 
+                xOffset = 10;
+                zOffset = 14;
+                break;
+            case 1:
+                xOffset = 0;
+                zOffset = 17;
+                break;
+            case 2:
+                xOffset = -8;
+                zOffset = -16;
+                break;
+        }
+        state.camera.position.lerp(v.set(Math.sin(t / 5) + xOffset, 0, zOffset + Math.cos(t / 5) / 2), 0.05)
         // state.camera.lookAt(0, 0, 0)
     })
-}
-
-function Lightformers({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
-    const group = useRef()
-    useFrame((state, delta) => (group.current.position.z += delta * 10) > 20 && (group.current.position.z = -60))
-    const {activeColor, colors} = useStateStore();
-    return (
-        <>
-            {/* Ceiling */}
-            <Lightformer intensity={0.75} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
-            <group rotation={[0, 0.5, 0]}>
-                <group ref={group}>
-                    {positions.map((x, i) => (
-                        <Lightformer key={i} form="circle" intensity={2} rotation={[Math.PI / 2, 0, 0]} position={[x, 4, i * 4]} scale={[3, 1, 1]} />
-                    ))}
-                </group>
-            </group>
-            {/* Sides */}
-            <Lightformer intensity={4} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 0.1, 1]} />
-            <Lightformer rotation-y={Math.PI / 2} position={[-5, -1, -1]} scale={[20, 0.5, 1]} />
-            <Lightformer rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={[20, 1, 1]} />
-            {/* Accent (red) */}
-            <Float speed={5} floatIntensity={2} rotationIntensity={2}>
-                <Lightformer form="ring" color={colors.filter(color => color.name === activeColor)[0].hex } intensity={1} scale={10} position={[-15, 4, -18]} target={[0, 0, 0]} />
-            </Float>
-            {/* Background */}
-        </>
-    )
 }
 
 export default Experience;

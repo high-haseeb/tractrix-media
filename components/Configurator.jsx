@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import useStateStore from '@/stores/stateStore'
 
@@ -12,7 +12,7 @@ import Stats from "@/components/sections/Stats";
 
 
 const Configurator = () => {
-    const { variants, activeVariant } = useStateStore();
+    const { variants, activeVariant, setActiveSection } = useStateStore();
 
     const sections = [
         {
@@ -36,7 +36,11 @@ const Configurator = () => {
             component: <UtilityAccessories />
         }
     ]
-    const [activeSection, setActiveSection] = useState(0);
+    const [activeSection, setActiveSectionLocal] = useState(0);
+
+    useEffect(() => {
+        setActiveSection(activeSection);
+    }, [activeSection]);
 
     return (
         <div className='w-full h-full px-20 pt-20 pb-0 bg-white'>
@@ -58,7 +62,9 @@ const Configurator = () => {
                         activeSection === 0 ?
                             (<button
                                 className='bg-black text-white px-12 font-bold rounded-full py-1 shadow shodow-black/40'
-                                onClick={() => setActiveSection(s => (s + 1) % sections.length)}
+                                onClick={() => { 
+                                    setActiveSectionLocal(s => (s + 1) % sections.length); 
+                                }}
                             >
                                 Next
                             </button>)
@@ -67,13 +73,17 @@ const Configurator = () => {
                                 <div className='flex gap-4'>
                                     <button
                                         className='bg-black font-bold rounded-full shadow shodow-black/40 flex items-center justify-center p-2'
-                                        onClick={() => setActiveSection(s => (s - 1 + sections.length) % sections.length)}
+                                        onClick={() => {
+                                            setActiveSectionLocal(s => (s - 1 + sections.length) % sections.length);
+                                        }}
                                     >
                                         <Image src={"/icons/left.svg"} width={30} height={30} alt='prev' />
                                     </button>
                                     <button
                                         className='bg-black font-bold rounded-full shadow shodow-black/40 flex items-center justify-center p-2'
-                                        onClick={() => setActiveSection(s => (s + 1) % sections.length )}
+                                        onClick={() => {
+                                            setActiveSectionLocal(s => (s + 1) % sections.length);
+                                        }}
                                     >
                                         <Image src={"/icons/right.svg"} width={30} height={30} alt='next' />
                                     </button>

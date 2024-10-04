@@ -21,8 +21,8 @@ const useStateStore = create((set) => ({
         { name: "desert tan", hex: "#C2B19E" },
     ],
     woodColors: [
-        { name: "black", src: "/textures/black.webp" },
-        { name: "brown", src: "/textures/white.webp" },
+        { name: "black", src: "dark" },
+        { name: "brown", src: "laminate" },
     ],
     variants: [
         { title: "the pinky", value: 84.990 },
@@ -63,6 +63,8 @@ const useStateStore = create((set) => ({
     setActiveWoodColor: (woodColor) => set(() => ({ activeWoodColor: woodColor })),
     activeVariant: "the pinky",
     setActiveVariant: (variant) => set(() => ({ activeVariant: variant })),
+    activeSection : 0,
+    setActiveSection : (section) => set(() => ({ activeSection: section })),
 }));
 
 export default useStateStore;

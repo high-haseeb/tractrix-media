@@ -4,20 +4,57 @@ Command: npx gltfjsx@6.2.16 trailer.glb -TM
 Files: trailer.glb [57.2MB] > /home/haseeb/probe/tractrix-media/public/models/trailer-transformed.glb [2.16MB] (96%)
 */
 
-import React, { useLayoutEffect, useRef } from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
-import { applyProps } from '@react-three/fiber'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
+import { useGLTF, useAnimations, useTexture } from '@react-three/drei'
+import { applyProps, useFrame } from '@react-three/fiber'
 import useStateStore from "@/stores/stateStore"
+import * as THREE from 'three';
 
 export function Trailer(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/trailer-transformed.glb')
     const { actions } = useAnimations(animations, group);
-    const { colors, activeColor } = useStateStore();
+    const { colors, activeColor, woodColors, activeWoodColor } = useStateStore();
 
+    useEffect(() => {
+        for (const key in actions) {
+            if (actions.hasOwnProperty(key)) {
+                actions[key].play();
+                actions[key].clampWhenFinished = true;
+                actions[key].loop = THREE.LoopOnce;
+            }
+        }
+    }, [actions]);
+    const blackWood = useTexture({
+        map: `/textures/wood/${woodColors[0].src}/diff.jpg`,
+        aoMap: `/textures/wood/${woodColors[0].src}/arm.jpg`,
+        metalnessMap: `/textures/wood/${woodColors[0].src}/arm.jpg`,
+    });
+
+    const whiteWood = useTexture({
+        map: `/textures/wood/${woodColors[1].src}/diff.jpg`,
+        aoMap: `/textures/wood/${woodColors[1].src}/arm.jpg`,
+        metalnessMap: `/textures/wood/${woodColors[1].src}/arm.jpg`,
+    });
+    whiteWood.map.colorSpace = THREE.SRGBColorSpace;
+    blackWood.map.colorSpace = THREE.SRGBColorSpace;
+    // for (const key in whiteWood) {
+    //     whiteWood[key].colorSpace = THREE.SRGBColorSpace;
+    // }
+    // for (const key in blackWood) {
+    //     blackWood[key].colorSpace = THREE.SRGBColorSpace;
+    // }
+
+    
     useLayoutEffect(() => {
-        applyProps(materials.body, { color: colors.filter(color => color.name === activeColor)[0].hex });
-    }, [activeColor, materials, nodes]);
+        applyProps(materials.body, { color: colors.filter(color => color.name === activeColor)[0].hex, metalness: 0.7, roughness: 0.3 });
+            applyProps(materials.floor_roof, { color:0xffffffff, toneMapping : false, transparent: true, side: THREE.DoubleSide  });
+        woodColors.filter(color => color.name === activeWoodColor)[0].name === "black" ?
+            applyProps(materials.floor_roof, { ...blackWood }) :
+            applyProps(materials.floor_roof, { ...whiteWood });
+
+        applyProps(materials.Rubber_Rough_001_Black_50cm, { color: "black", metalness: 0.2, roughness: 0.9 });
+    }, [activeColor, materials, nodes, activeWoodColor]);
 
     return (
         <group ref={group} {...props} dispose={null}>
@@ -30,15 +67,18 @@ export function Trailer(props) {
                 <mesh name="walktop008" geometry={nodes.walktop008.geometry} material={materials.Speckled_Plastic_01} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop010" geometry={nodes.walktop010.geometry} material={materials.Rubber_Grip_01_1} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop011" geometry={nodes.walktop011.geometry} material={materials.Iron_Cast_01} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-                <mesh name="walktop013" geometry={nodes.walktop013.geometry} material={materials.Neon_Red} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+                {/* <mesh name="walktop013" geometry={nodes.walktop013.geometry} material={materials.Neon_Red} rotation={[Math.PI / 2, 0, 0]} scale={0.21} /> */}
                 <mesh name="walktop021" geometry={nodes.walktop021.geometry} material={materials.Paper_Speaker} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop022" geometry={nodes.walktop022.geometry} material={materials['default']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop032" geometry={nodes.walktop032.geometry} material={materials.Iron_01_1} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop033" geometry={nodes.walktop033.geometry} material={materials.C_Iron_Corroded_Stained_1} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop034" geometry={nodes.walktop034.geometry} material={materials.jack} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop041" geometry={nodes.walktop041.geometry} material={materials.D_Black_Plastic_Dull} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-                <mesh name="walktop042" geometry={nodes.walktop042.geometry} material={materials.Neon_Orange} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-                <mesh name="walktop043" geometry={nodes.walktop043.geometry} material={materials.D_Tinted_Glass} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+                {/* <mesh name="walktop042" geometry={nodes.walktop042.geometry} material={materials.Neon_Orange} rotation={[Math.PI / 2, 0, 0]} scale={0.21} /> */}
+                <mesh name="walktop043" geometry={nodes.walktop043.geometry} rotation={[Math.PI / 2, 0, 0]} scale={0.21} >
+                    <meshStandardMaterial {...materials.D_Tinted_Glass} emissive={'red'} emissiveIntensity={100} />
+                </mesh>
+
                 <mesh name="walktop045" geometry={nodes.walktop045.geometry} material={materials.Plastic_01_1} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop046" geometry={nodes.walktop046.geometry} material={materials.Rubber_Rough_001_Black_50cm} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
                 <mesh name="walktop047" geometry={nodes.walktop047.geometry} material={materials.D_Grey_Plastic_Aged} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
