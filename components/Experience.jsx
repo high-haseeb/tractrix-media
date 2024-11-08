@@ -1,19 +1,13 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-// import { Cart } from "@/components/Cart";
 import { Trailer } from "@/components/Trailer";
 import { Valut } from "@/components/Valut";
-import * as THREE from 'three'
-import { PerformanceMonitor, AccumulativeShadows, RandomizedLight, Environment, Lightformer, Float, OrbitControls, Stage, BakeShadows, Stats, useTexture, Cloud, Loader } from '@react-three/drei'
-import { LayerMaterial, Color, Depth } from 'lamina'
 import useStateStore from "@/stores/stateStore";
-import { Bloom, DepthOfField, EffectComposer, SSAO, ToneMapping, Vignette } from "@react-three/postprocessing";
-import { ToneMappingMode } from "postprocessing";
+import { BakeShadows, Loader, OrbitControls, Stage, Stats, useTexture } from '@react-three/drei';
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useState } from "react";
+import * as THREE from 'three';
 
 const Experience = () => {
-    const [degraded, degrade] = useState(false);
-    const { colors, activeColor } = useStateStore();
     return (
         <div className="h-full w-full bg-black">
             <Loader />
@@ -24,7 +18,6 @@ const Experience = () => {
                 <ambientLight color={'white'} intensity={0.5} />
                 <directionalLight position={[-1, 2, 1]} intensity={4} color={'red'} castShadow />
                 <fog color={0x00008B} near={2} far={100} attach={'fog'} />
-                <Stats />
                 <BakeShadows />
                 <Stage preset="upfront" center={{ disableX: true, disableZ: true }} environment="studio" adjustCamera={false} >
                     <Trailer scale={0.8} position={[0, 0, 0]} rotation={[0, 0 , 0]} />
@@ -34,7 +27,6 @@ const Experience = () => {
                 <OrbitControls enableZoom={true} enablePan={false} />
                 <CameraRig />
                 <Sky />
-                {/* <EffectComposer></EffectComposer> */}
             </Canvas>
         </div>
     );
@@ -97,8 +89,6 @@ const Ground = () => {
             concrete[key].repeat.set(10, 10);
         }
     }
-    // useEffect(() => {
-    // }, [concrete]);
     return (
         <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.5, 0]}>
             <planeGeometry args={[100, 100, 1, 1]} />
@@ -130,7 +120,6 @@ function CameraRig({ v = new THREE.Vector3() }) {
                 break;
         }
         state.camera.position.lerp(v.set(Math.sin(t / 5) + xOffset, 0, zOffset + Math.cos(t / 5) / 2), 0.05)
-        // state.camera.lookAt(0, 0, 0)
     })
 }
 
