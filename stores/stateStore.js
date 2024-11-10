@@ -1,4 +1,8 @@
 import { create } from 'zustand'
+import ExteriorColor from "@/components/sections/ExteriorColor";
+import InteriorColor from "@/components/sections/InteriorColor";
+import MovementAccessories from "@/components/sections/MovementAccessories";
+import UtilityAccessories from "@/components/sections/UtilityAccessories";
 
 const useStateStore = create((set) => ({
     colors: [
@@ -38,11 +42,11 @@ const useStateStore = create((set) => ({
     movementAccessories: [
         { title: "trailer jack", price: "0", detail: "500 lbs Electric Jack Electric and Manual", img: "jack.webp", checked: true },
         { title: "trailer dolly", price: "1,000", detail: "10,000 lbs Towing Manually Operated", img: "dolly.webp", checked: false },
-        { title: "trailer valet", price: "5,000", detail: "9,000 lbs Towing Remote Controlled" , img: "valet.webp", checked: false},
+        { title: "trailer valet", price: "5,000", detail: "9,000 lbs Towing Remote Controlled", img: "valet.webp", checked: false },
     ],
-    utilityAccessories : [
-        { title : "misting system", price : "2,500", detail: "On Both Sides"},
-        { title : "trailer stabilizer", price : "500", detail: "Four Units"},
+    utilityAccessories: [
+        { title: "misting system", price: "2,500", detail: "On Both Sides" },
+        { title: "trailer stabilizer", price: "500", detail: "Four Units" },
     ],
     activeMovementAccessories: ["trailer jack"],
     addMovementAccessory: (accessory) => set(() => ({ activeMovementAccessories: [...activeMovementAccessories, accessory] })),
@@ -63,9 +67,39 @@ const useStateStore = create((set) => ({
     setActiveWoodColor: (woodColor) => set(() => ({ activeWoodColor: woodColor })),
     activeVariant: "the pinky",
     setActiveVariant: (variant) => set(() => ({ activeVariant: variant })),
-    activeSection : 0,
-    setActiveSection : (section) => set(() => ({ activeSection: section })),
+    activeSection: 0,
+    setActiveSection: (section) => set(() => ({ activeSection: section })),
 }));
 
 export default useStateStore;
+
+export const useSectionsStore = create((set, get) => ({
+    sections: [
+        {
+            name: "color",
+            description: "exterior color options",
+            component: <ExteriorColor />
+        },
+        {
+            name: "interior color",
+            description: "interior color options",
+            component: <InteriorColor />
+        },
+        {
+            name: "movement accessories",
+            description: "optinal accessories",
+            component: <MovementAccessories />
+        },
+        {
+            name: "utility accessories",
+            description: "optinal accessories",
+            component: <UtilityAccessories />
+        }
+    ],
+    activeSectionIndex: 0,
+    setActiveSectionIndex: (sectionIndex) => set(() => ({ activeSectionIndex: sectionIndex })),
+    isFirstSection: () => get().activeSectionIndex === 0,
+    nextSection: () => set((state) => ({ activeSectionIndex: (state.activeSectionIndex + 1) % state.sections.length })),
+    prevSection: () => set((state) => ({ activeSectionIndex: (state.activeSectionIndex - 1 + state.sections.length) % state.sections.length })),
+}));
 
