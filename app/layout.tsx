@@ -11,7 +11,7 @@ const segoe = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Tractrix Media",
+  title: "Well Built",
   description: "made by high-haseeb",
 };
 
