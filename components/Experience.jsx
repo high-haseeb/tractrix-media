@@ -15,6 +15,7 @@ import { Valut } from "@/components/Valut";
 import Sky from "@/components/Sky";
 import Ground from "@/components/Ground";
 import CameraRig from "@/components/CameraRig";
+import { useMovementStore } from "@/stores/stateStore";
 
 const Experience = () => {
     return (
@@ -25,7 +26,7 @@ const Experience = () => {
                     <fog color={0x00008B} near={2} far={100} attach={'fog'} />
                     <Stage preset="upfront" center={{ disableX: true, disableZ: true }} adjustCamera={false} >
                         <Trailer scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} />
-                        <Valut scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} />
+                        <MovementModels />
                     </Stage>
                     <Ground positionY={-3.0} />
                     <OrbitControls enableZoom={true} enablePan={false} />
@@ -42,5 +43,15 @@ const Experience = () => {
         </div>
     );
 };
+const MovementModels = () => {
+    const { activeMovement } = useMovementStore();
+    return (
+        <>
+            {
+                activeMovement.has("trailer valet") ? <Valut scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} /> : null
+            }
+        </>
+    )
+}
 
 export default Experience;
