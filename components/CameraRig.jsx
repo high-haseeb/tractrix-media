@@ -3,26 +3,40 @@ import * as THREE from "three";
 import { useSectionsStore } from "@/stores/stateStore";
 
 const CameraRig = ({ v = new THREE.Vector3() }) => {
-    const { activeSectionIndex } = useSectionsStore();
+    const { activeSectionIndex, sections } = useSectionsStore();
     let xOffset = 0;
     let zOffset = 0;
+    let yOffset = 0;
     return useFrame((state) => {
         const t = state.clock.elapsedTime;
-        switch (activeSectionIndex) {
-            case 0:
+        switch (sections[activeSectionIndex].name) {
+            case "color":
+                xOffset = 10;
+                zOffset = 14;
+                yOffset = 0;
+                break;
+            case "interior color":
+                xOffset = 0;
+                zOffset = 17;
+                yOffset = 0;
+                break;
+            case "movement accessories":
+                xOffset = -4;
+                zOffset = -20;
+                yOffset = 3;
+                break;
+            case "utility accessories":
+                xOffset = 15;
+                zOffset = 0;
+                yOffset = 0;
+                break;
+            default:
                 xOffset = 10;
                 zOffset = 14;
                 break;
-            case 1:
-                xOffset = 0;
-                zOffset = 17;
-                break;
-            case 2:
-                xOffset = -8;
-                zOffset = -16;
-                break;
+
         }
-        state.camera.position.lerp(v.set(Math.sin(t / 5) + xOffset, 0, zOffset + Math.cos(t / 5) / 2), 0.05)
+        state.camera.position.lerp(v.set(Math.sin(t / 5) + xOffset, yOffset, zOffset + Math.cos(t / 5) / 2), 0.05)
     })
 }
 
