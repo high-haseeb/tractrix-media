@@ -1,10 +1,10 @@
 import React from 'react'
-import useStateStore from "@/stores/stateStore";
+import { useMovementStore } from "@/stores/stateStore";
 import ButtonModal from '@/components/ui/ButtonModal';
 import CardOption from '@/components/ui/CardOption';
 
 const MovementAccessories = () => {
-    const { movementAccessories, activeMovementAccessories, addMovementAccessory, removeMovementAccessory } = useStateStore();
+    const { movementArray, addMovement, removeMovement, activeMovement } = useMovementStore();
     return (
         <div className='flex flex-col gap-4 w-full'>
             <div className='flex flex-col items-center justify-center'>
@@ -12,10 +12,11 @@ const MovementAccessories = () => {
             </div>
             <div className='flex items-center justify-center gap-4'>
                 {
-                    movementAccessories.map((accessory, idx) => <CardOption key={idx} {...accessory} />)
+                    movementArray.map((accessory, idx) => <CardOption key={idx} {...accessory} onCheck={addMovement} onUncheck={removeMovement} 
+                        checked={activeMovement.has(accessory.title)}/>)
                 }
             </div>
-            {/* <ButtonModal title={"feature details"} details={accessories.filter((accessory) => accessory.title === activeAccessories)} /> */}
+            <ButtonModal title={"feature details"} details={movementArray} />
         </div>
     )
 }

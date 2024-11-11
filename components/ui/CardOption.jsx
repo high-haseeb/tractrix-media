@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
-const CardOption = ({ title, price, img, detail, checked, horizontal = false }) => {
+const CardOption = ({ title, price, img, detail, checked, horizontal = false, onCheck = () => console.log("checked"), onUncheck = () => console.log("unchecked") }) => {
     const [selected, setSelected] = useState(checked);
     return (
         <>
@@ -11,6 +11,7 @@ const CardOption = ({ title, price, img, detail, checked, horizontal = false }) 
                         onClick={
                             () => {
                                 setSelected(s => !s);
+                                !selected ? onCheck(title) : onUncheck(title);
                             }}
                     >
                         <div className='flex gap-4'>
@@ -26,12 +27,12 @@ const CardOption = ({ title, price, img, detail, checked, horizontal = false }) 
                     </div >
                 )
                 :
-
                 (
                     <div className='flex flex-col border border-[#707070] rounded-3xl h-[15rem] p-4 items-center justify-center relative cursor-pointer'
                         onClick={
                             () => {
                                 setSelected(s => !s);
+                                !selected ? onCheck(title) : onUncheck(title);
                             }}
                     >
                         <div className='bg-black/20 rounded-xl absolute w-8 h-8 right-4 top-4 flex items-center justify-center'>
