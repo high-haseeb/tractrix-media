@@ -4,20 +4,23 @@ import useStateStore, { useSectionsStore } from '@/stores/stateStore'
 
 import Variants from "@/components/sections/Variants";
 import Stats from "@/components/sections/Stats";
+import useCheckMobile from "@/components/utils/isMobile";
 
 
 const Configurator = () => {
-    const { sections, activeSectionIndex } = useSectionsStore();
-
+    const { sections, mobileSections, activeSectionIndex } = useSectionsStore();
+    let activeSections = sections;
+    if (useCheckMobile()) activeSections = mobileSections;
     return (
-        <div className="w-full h-full px-20 pt-20 pb-0 bg-white">
-            <div className="flex flex-col items-center justify-start gap-8 relative h-full">
+        <div className="w-full h-full px-6 lg:px-20 lg:pt-20 pt-8 bg-white overflow-y-scroll overflow-x-hidden ">
+            <div className="flex flex-col items-center justify-start lg:gap-8 gap-2 lg:relative h-full">
                 {/* <OptionSlider activeOption={financeOption} setActiveOption={setFinanceOption} /> */}
                 <Title />
-                <Stats />
-                <Variants />
                 {
-                    sections[activeSectionIndex].component
+                    activeSections === sections ? mobileSections[0].component : null
+                }
+                {
+                    activeSections[activeSectionIndex].component
                 }
                 <Footer />
             </div>
@@ -25,10 +28,10 @@ const Configurator = () => {
     )
 }
 
-const Title = () => <div className="font-extrabold text-4xl">Trailer Uno</div>;
+const Title = () => <div className="font-extrabold lg:text-4xl text-3xl w-full text-center">Trailer Uno</div>;
 
 const Footer = () => {
-    const { nextSection, prevSection, isFirstSection } = useSectionsStore();
+    const { nextSection, prevSection, nextSectionMobile, prevSectionMobile, isFirstSection } = useSectionsStore();
     const { variants, activeVariant } = useStateStore();
 
     const TextButton = ({ title, action }) =>
@@ -42,9 +45,28 @@ const Footer = () => {
         </button>
 
 
+    if (useCheckMobile()) {
+        return (
+            <div className="w-full absolute bottom-0 shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white">
+                <div >
+                    <div className='text-2xl font-bold'>${variants.filter(s => s.title === activeVariant)[0].value.toFixed(3)}</div>
+                    <div className='text-light text-black/50 text-base capitalize'>Sales tax not included</div>
+                </div>
+                {
+                    isFirstSection() ?
+                        <TextButton title={"Next"} action={nextSectionMobile} />
+                        :
+                        <div className="flex gap-4">
+                            <ImageButton imgUrl={"/icons/left.svg"} action={prevSectionMobile} />
+                            <ImageButton imgUrl={"/icons/right.svg"} action={nextSectionMobile} />
+                        </div>
+                }
+            </div>
+        )
+    }
     return (
 
-        <div className='w-full absolute bottom-0 shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white'>
+        <div className="w-full absolute bottom-0 shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white">
             <div >
                 <div className='text-2xl font-bold'>${variants.filter(s => s.title === activeVariant)[0].value.toFixed(3)}</div>
                 <div className='text-light text-black/50 text-base capitalize'>Sales tax not included</div>

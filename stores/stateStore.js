@@ -3,6 +3,8 @@ import ExteriorColor from "@/components/sections/ExteriorColor";
 import InteriorColor from "@/components/sections/InteriorColor";
 import MovementAccessories from "@/components/sections/MovementAccessories";
 import UtilityAccessories from "@/components/sections/UtilityAccessories";
+import Stats from "@/components/sections/Stats"
+import Variants from "@/components/sections/Variants"
 
 const useStateStore = create((set) => ({
     colors: [
@@ -62,6 +64,37 @@ const useStateStore = create((set) => ({
 export default useStateStore;
 
 export const useSectionsStore = create((set, get) => ({
+    mobileSections: [
+        {
+            name: "variants",
+            description: "test",
+            component:
+                (<>
+                    <Stats />
+                    <Variants />
+                </>)
+        },
+        {
+            name: "color",
+            description: "exterior color options",
+            component: <ExteriorColor />
+        },
+        {
+            name: "interior color",
+            description: "interior color options",
+            component: <InteriorColor />
+        },
+        {
+            name: "movement accessories",
+            description: "optinal accessories",
+            component: <MovementAccessories />
+        },
+        {
+            name: "utility accessories",
+            description: "optinal accessories",
+            component: <UtilityAccessories />
+        }
+    ],
     sections: [
         {
             name: "color",
@@ -89,6 +122,9 @@ export const useSectionsStore = create((set, get) => ({
     isFirstSection: () => get().activeSectionIndex === 0,
     nextSection: () => set((state) => ({ activeSectionIndex: (state.activeSectionIndex + 1) % state.sections.length })),
     prevSection: () => set((state) => ({ activeSectionIndex: (state.activeSectionIndex - 1 + state.sections.length) % state.sections.length })),
+
+    nextSectionMobile: () => set((state) => ({ activeSectionIndex: (state.activeSectionIndex + 1) % state.mobileSections.length })),
+    prevSectionMobile: () => set((state) => ({ activeSectionIndex: (state.activeSectionIndex - 1 + state.mobileSections.length) % state.mobileSections.length })),
 }));
 
 export const useMovementStore = create((set) => ({
@@ -97,7 +133,7 @@ export const useMovementStore = create((set) => ({
         { title: "trailer dolly", price: "1,000", detail: "10,000 lbs Towing Manually Operated", img: "dolly.webp" },
         { title: "trailer valet", price: "5,000", detail: "9,000 lbs Towing Remote Controlled", img: "valet.webp" },
     ],
-    activeMovement: new Set([ "trailer jack" ]),
+    activeMovement: new Set(["trailer jack"]),
     addMovement: (accessory) => set((state) => ({ activeMovement: state.activeMovement.add(accessory) })),
     removeMovement: (accessory) => set((state) => ({ activeMovementAccessories: state.activeMovement.delete(accessory) })),
 }));
