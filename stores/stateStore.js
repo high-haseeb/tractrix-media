@@ -5,6 +5,13 @@ import MovementAccessories from "@/components/sections/MovementAccessories";
 import UtilityAccessories from "@/components/sections/UtilityAccessories";
 import Stats from "@/components/sections/Stats"
 import Variants from "@/components/sections/Variants"
+import AdjustablePully from "@/components/sections/AdjustablePully"
+import AdjustableWeights from "@/components/sections/AdjustableWeights"
+import RoundStation from "@/components/sections/RoundStation"
+import Barbel from "@/components/sections/Barbel"
+import AccountDetail from "@/components/sections/AccountDetail"
+import CardDetails from "@/components/sections/CardDetails"
+import ThankUpage from "@/components/sections/ThankUpage"
 
 const useStateStore = create((set) => ({
     colors: [
@@ -77,7 +84,7 @@ export const useSectionsStore = create((set, get) => ({
         {
             name: "color",
             description: "exterior color options",
-            component: <ExteriorColor />
+            component: <ExteriorColor/>
         },
         {
             name: "interior color",
@@ -97,25 +104,71 @@ export const useSectionsStore = create((set, get) => ({
     ],
     sections: [
         {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <Barbel/>,
+            default : true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <RoundStation/>,
+            default : true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <AdjustableWeights/>,
+            default : true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <AdjustablePully/>,
+            default : true
+        },
+        {
             name: "color",
             description: "exterior color options",
-            component: <ExteriorColor />
+            component: <ExteriorColor/>,
+            default : true
         },
         {
             name: "interior color",
             description: "interior color options",
-            component: <InteriorColor />
+            component: <InteriorColor />,
+            default : true
         },
         {
             name: "movement accessories",
             description: "optinal accessories",
-            component: <MovementAccessories />
+            component: <MovementAccessories />,
+            default : true
         },
         {
             name: "utility accessories",
             description: "optinal accessories",
-            component: <UtilityAccessories />
-        }
+            component: <UtilityAccessories />,
+            default : true
+        },
+        {
+            name:"Card",
+            description:"Card Details",
+            component:<CardDetails/>,
+            default:false
+        },
+        {
+            name: "Account",
+            description: "Account Details",
+            component: <AccountDetail/>,
+            default : false
+        },
+        {
+            name:"Thanks",
+            description:"Thanks Page",
+            component:<ThankUpage/>,
+            default:false
+        },
     ],
     activeSectionIndex: 0,
     setActiveSectionIndex: (sectionIndex) => set(() => ({ activeSectionIndex: sectionIndex })),
@@ -137,4 +190,6 @@ export const useMovementStore = create((set) => ({
     addMovement: (accessory) => set((state) => ({ activeMovement: state.activeMovement.add(accessory) })),
     removeMovement: (accessory) => set((state) => ({ activeMovementAccessories: state.activeMovement.delete(accessory) })),
 }));
+
+
 

@@ -14,7 +14,7 @@ const InteriorColor = () => {
             </div>
             <div className='flex items-center justify-center'>
                 {
-                    woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.src} active={activeWoodColor} setActive={setActiveWoodColor} key={idx} />)
+                    woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.src} active={activeWoodColor} setActive={setActiveWoodColor} key={idx}/>)
                 }
             </div>
             <ButtonModal items={woodColors} />
