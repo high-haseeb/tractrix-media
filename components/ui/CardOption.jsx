@@ -7,7 +7,7 @@ const CardOption = ({ title, price, img, detail, checked, horizontal = false, on
         <>
             {horizontal ?
                 (
-                    <div className='flex w-full border border-[#707070] rounded-3xl p-4 items-center justify-between relative cursor-pointer'
+                       <div className='flex w-full border border-[#707070] rounded-3xl p-4 items-center justify-between relative cursor-pointer'
                         onClick={
                             () => {
                                 setSelected(s => !s);
