@@ -38,10 +38,10 @@ const useStateStore = create((set) => ({
         { name: "brown", src: "laminate", img: "/img/white-wood.webp" },
     ],
     variants: [
-        { title: "the pinky", value: 84.990 },
-        { title: "the double", value: 89.990 },
-        { title: "the trio", value: 95.990 },
-        { title: "the chief", value: 99.990 },
+        { title: "the pinky", value: "84,990" },
+        { title: "the double", value: "89,990" },
+        { title: "the trio", value: "95,990" },
+        { title: "the chief", value: "99,990" },
     ],
     stats: [
         { title: "operating", value: "2-3", unit: "hrs" },
@@ -84,7 +84,7 @@ export const useSectionsStore = create((set, get) => ({
         {
             name: "color",
             description: "exterior color options",
-            component: <ExteriorColor/>
+            component: <ExteriorColor />
         },
         {
             name: "interior color",
@@ -104,70 +104,70 @@ export const useSectionsStore = create((set, get) => ({
     ],
     sections: [
         {
-            name: "Equipments",
-            description: "optinal accessories",
-            component: <Barbel/>,
-            default : true
-        },
-        {
-            name: "Equipments",
-            description: "optinal accessories",
-            component: <RoundStation/>,
-            default : true
-        },
-        {
-            name: "Equipments",
-            description: "optinal accessories",
-            component: <AdjustableWeights/>,
-            default : true
-        },
-        {
-            name: "Equipments",
-            description: "optinal accessories",
-            component: <AdjustablePully/>,
-            default : true
-        },
-        {
             name: "color",
             description: "exterior color options",
-            component: <ExteriorColor/>,
-            default : true
+            component: <ExteriorColor />,
+            default: true
         },
         {
             name: "interior color",
             description: "interior color options",
             component: <InteriorColor />,
-            default : true
+            default: true
         },
         {
             name: "movement accessories",
             description: "optinal accessories",
             component: <MovementAccessories />,
-            default : true
+            default: true
         },
         {
             name: "utility accessories",
             description: "optinal accessories",
             component: <UtilityAccessories />,
-            default : true
+            default: true
         },
         {
-            name:"Card",
-            description:"Card Details",
-            component:<CardDetails/>,
-            default:false
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <Barbel />,
+            default: true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <RoundStation />,
+            default: true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <AdjustableWeights />,
+            default: true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <AdjustablePully />,
+            default: true
+        },
+        {
+            name: "Card",
+            description: "Card Details",
+            component: <CardDetails />,
+            default: false
         },
         {
             name: "Account",
             description: "Account Details",
-            component: <AccountDetail/>,
-            default : false
+            component: <AccountDetail />,
+            default: false
         },
         {
-            name:"Thanks",
-            description:"Thanks Page",
-            component:<ThankUpage/>,
-            default:false
+            name: "Thanks",
+            description: "Thanks Page",
+            component: <ThankUpage />,
+            default: false
         },
     ],
     activeSectionIndex: 0,

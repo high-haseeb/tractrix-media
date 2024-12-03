@@ -16,7 +16,7 @@ const CameraRig = ({ v = new THREE.Vector3() }) => {
             case "color":
                 xOffset = 10;
                 zOffset = 14;
-                yOffset = 0;
+                yOffset = 1;
                 break;
             case "interior color":
                 xOffset = 0;
@@ -24,9 +24,9 @@ const CameraRig = ({ v = new THREE.Vector3() }) => {
                 yOffset = 0;
                 break;
             case "movement accessories":
-                xOffset = -4;
+                xOffset = -10;
                 zOffset = -20;
-                yOffset = 3;
+                yOffset = 1;
                 break;
             case "utility accessories":
                 xOffset = 15;

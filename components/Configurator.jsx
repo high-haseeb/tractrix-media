@@ -55,7 +55,7 @@ const Footer = () => {
     return (
         <div className="w-full absolute bottom-0 shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white">
             <div>
-                <div className='text-2xl font-bold'>${currentVariant ? currentVariant.value.toFixed(3) : "0.000"}</div>
+                <div className='text-2xl font-bold'>${currentVariant ? currentVariant.value : "0.000"}</div>
                 <div className='text-light text-black/50 text-base capitalize'>Sales tax not included</div>
             </div>
             {isFirstSection() ? (
