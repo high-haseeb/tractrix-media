@@ -1,16 +1,23 @@
-import React from 'react'
-import useStateStore from "@/stores/stateStore";
-import Stat from "@/components/ui/Stat";
+import useVariantStore from '@/stores/VariantStore';
 
 const Stats = () => {
-    const { stats } = useStateStore();
+    const { activeVariantName, variants } = useVariantStore();
+    const stats = variants.filter((variant) => variant.name == activeVariantName)[0].stats;
+
     return (
-        <div className="flex justify-between w-full">
-            {
-                stats.map((stat, idx) => <Stat {...stat} key={idx} />)
-            }
+        <div className="flex justify-between w-full transition-all">
+            <Stat title={'Operating'} value={stats.operatingHours} unit={'hrs'} />
+            <Stat title={'Solar Panels'} value={stats.solarCapacity} unit={'W'} />
+            <Stat title={'Battery Capacity'} value={stats.batteryCapacity} unit={'kWh'} />
         </div>
     )
 }
+
+const Stat = ({ title, value, unit }) => (
+    <div className="flex flex-col items-center justify-center">
+        <div className='text-xl lg:text-3xl font-semibold leading-[-1]'> {value} <span className='lg:text-xl text-base'>{unit}</span> </div>
+        <div className='capitalize text-sm'>{title}</div>
+    </div>
+)
 
 export default Stats

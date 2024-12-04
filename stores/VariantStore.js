@@ -21,7 +21,7 @@ const useVariantStore = create((set) => ({
                 finance: "1,400"
             },
             stats: {
-                opeartingHours: "4-5",
+                operatingHours: "4-5",
                 solarCapacity: "800",
                 batteryCapacity: "6.6"
             }
@@ -33,7 +33,7 @@ const useVariantStore = create((set) => ({
                 finance: "1,500"
             },
             stats: {
-                opeartingHours: "6-7",
+                operatingHours: "6-7",
                 solarCapacity: "1,200",
                 batteryCapacity: "15.9"
             }
@@ -45,7 +45,7 @@ const useVariantStore = create((set) => ({
                 finance: "1,600"
             },
             stats: {
-                opeartingHours: "8-10",
+                operatingHours: "8-10",
                 solarCapacity: "1,200",
                 batteryCapacity: "21.2"
             }
