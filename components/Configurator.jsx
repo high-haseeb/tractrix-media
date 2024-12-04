@@ -31,7 +31,7 @@ const Configurator = () => {
 };
 
 const Title = () => (
-    <div className="font-extrabold lg:text-4xl text-3xl w-full text-center">Trailer Uno</div>
+    <div className="font-bold lg:text-4xl text-3xl w-full text-center">Trailer Uno</div>
 );
 
 

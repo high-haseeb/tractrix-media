@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import Image from 'next/image';
-import useStateStore from '@/stores/stateStore';
 import WoodColorOption from "@/components/ui/WoodColorOption";
+import useColorStore from '@/stores/ColorStore';
 
 const InteriorColor = () => {
-    const { woodColors, activeWoodColor, setActiveWoodColor } = useStateStore();
+    const { woodColors, activeWoodColor, setActiveWoodColor } = useColorStore();
     return (
         <div className='flex flex-col gap-4 w-full'>
             <div className='flex flex-col items-center justify-center text-black/50'>
@@ -14,13 +14,14 @@ const InteriorColor = () => {
             </div>
             <div className='flex items-center justify-center'>
                 {
-                    woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.src} active={activeWoodColor} setActive={setActiveWoodColor} key={idx}/>)
+                    woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.img} active={activeWoodColor} setActive={setActiveWoodColor} key={idx}/>)
                 }
             </div>
             <ButtonModal items={woodColors} />
         </div>
     )
 }
+
 
 
 const ButtonModal = ({ items }) => {

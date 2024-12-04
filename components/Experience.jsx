@@ -36,7 +36,7 @@ const Experience = () => {
                     <Ground positionY={-3.0} />
                     <OrbitControls enableZoom={true} enablePan={false} />
                     <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
-                    <directionalLight position={[10, 100, 10]} color={'darkblue'}/>
+                    <directionalLight position={[10, 100, 10]} color={'darkblue'} />
                     <ambientLight intensity={0.5} />
                     <Environment environmentIntensity={1.5} preset="city" />
                     <CameraRig />

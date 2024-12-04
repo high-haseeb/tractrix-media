@@ -12,36 +12,9 @@ import Barbel from "@/components/sections/Barbel"
 import AccountDetail from "@/components/sections/AccountDetail"
 import CardDetails from "@/components/sections/CardDetails"
 import ThankUpage from "@/components/sections/ThankUpage"
+import FinanceOptionSlider from "@/components/ui/FinanceOptionSlider"
 
 const useStateStore = create((set) => ({
-    colors: [
-        { name: "true black", hex: "#010101" },
-        { name: "matte black", hex: "#01011D" },
-        { name: "charcol gray", hex: "#52595D" },
-        { name: "old zinc gray", hex: "#858078" },
-        { name: "old town gray", hex: "#8B9396" },
-        { name: "regal white", hex: "#F1F1EF" },
-        { name: "wheathered copper", hex: "#554E44" },
-        { name: "parchment", hex: "#CAC7B6" },
-        { name: "hartford green", hex: "#012120" },
-        { name: "dark bronze", hex: "#383428" },
-        { name: "moss green", hex: "#00332E" },
-        { name: "leaf green", hex: "#085344" },
-        { name: "tahoe blue", hex: "#346799" },
-        { name: "deep blue sea", hex: "#02455D" },
-        { name: "colonial red", hex: "#68050A" },
-        { name: "redi-mix red", hex: "#93052D" },
-        { name: "desert tan", hex: "#C2B19E" },
-    ],
-    woodColors: [
-        { name: "black", src: "dark", img: "/img/brown-wood.webp" },
-        { name: "brown", src: "laminate", img: "/img/white-wood.webp" },
-    ],
-    stats: [
-        { title: "operating", value: "2-3", unit: "hrs" },
-        { title: "solar panels", value: "800", unit: "W" },
-        { title: "battery capacity", value: "5.3", unit: "kWh" },
-    ],
     utilityAccessories: [
         { title: "misting system", price: "2,500", detail: "On Both Sides" },
         { title: "trailer stabilizer", price: "500", detail: "Four Units" },
@@ -54,8 +27,6 @@ const useStateStore = create((set) => ({
     })),
 
 
-    activeWoodColor: "black",
-    setActiveWoodColor: (woodColor) => set(() => ({ activeWoodColor: woodColor })),
 }));
 
 export default useStateStore;
@@ -68,6 +39,7 @@ export const useSectionsStore = create((set, get) => ({
             component:
                 (<>
                     <Stats />
+                    <FinanceOptionSlider />
                     <Variants />
                 </>)
         },

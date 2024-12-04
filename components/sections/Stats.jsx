@@ -14,9 +14,9 @@ const Stats = () => {
 }
 
 const Stat = ({ title, value, unit }) => (
-    <div className="flex flex-col items-center justify-center">
-        <div className='text-xl lg:text-3xl font-semibold leading-[-1]'> {value} <span className='lg:text-xl text-base'>{unit}</span> </div>
-        <div className='capitalize text-sm'>{title}</div>
+    <div className="flex flex-col items-center justify-center w-1/3">
+        <div className='text-xl lg:text-2xl font-semibold leading-none'> {value} <span className='lg:text-xl text-base'>{unit}</span> </div>
+        <div className='capitalize text-base leading-none'>{title}</div>
     </div>
 )
 

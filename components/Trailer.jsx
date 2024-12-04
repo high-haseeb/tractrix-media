@@ -9,8 +9,7 @@ export function Trailer(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/trailer.glb')
     const { actions } = useAnimations(animations, group);
-    const { woodColors, activeWoodColor } = useStateStore();
-    const { colors, activeColor } = useColorStore();
+    const { colors, activeColor, woodColors, activeWoodColor  } = useColorStore();
 
 
     useEffect(() => {
@@ -46,9 +45,9 @@ export function Trailer(props) {
     useLayoutEffect(() => {
         applyProps(materials.body, { metallness: 0.5, roughness: 0.5 });
         applyProps(materials['Rubber_Rough_001_Black_50cm.001'], { roughness: 1.0, metallness: 0.0, color: "#444" })
-        woodColors.filter(color => color.name === activeWoodColor)[0].name === "black" ?
-            applyProps(materials.floor_roof, { ...blackWood }) :
-            applyProps(materials.floor_roof, { ...whiteWood });
+        woodColors.filter(color => color.name === activeWoodColor)[0].name === "choclate cork" ?
+            applyProps(materials.floor_roof, { ...whiteWood }):
+            applyProps(materials.floor_roof, { ...blackWood });
     }, [activeColor, materials, nodes, activeWoodColor]);
 
     return (

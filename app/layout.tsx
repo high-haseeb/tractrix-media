@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local"
 import "./globals.css";
+import { Inter } from 'next/font/google'
 
-const segoe = localFont({
-  src: [
-    { path: "./fonts/Segoe UI.ttf", style: 'normal', weight: "400" },
-    { path: "./fonts/Segoe UI Bold.ttf", style: 'normal', weight: "700" },
-  ],
-  variable: "--font-segoe"
-});
+const inter = Inter({ subsets: ['latin'] });
+
 
 export const metadata: Metadata = {
   title: "Well Built",
@@ -22,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${segoe.variable} font-segoe`}>{children}</body>
+      <body className={`${inter.className}`}>{children}</body>
     </html>
   );
 }
