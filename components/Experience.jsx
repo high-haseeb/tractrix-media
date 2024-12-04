@@ -23,8 +23,8 @@ import { Bloom, BrightnessContrast, EffectComposer, ToneMapping } from "@react-t
 const Experience = () => {
     return (
         <div className="h-full w-full bg-black relative">
-            <Image src={"/logo.webp"} width={300} height={100} alt="logo" className="absolute top-4 left-0 z-50 w-20 lg:w-auto" />
-            <Image src={"/logo-symbol.webp"} width={150} height={100} alt="logo" className="absolute bottom-2 left-2 z-50 w-10 lg:w-auto" />
+            <Image src={"/logo.webp"} width={300} height={100} alt="logo" className="absolute top-4 left-0 z-50 w-20 lg:w-80" />
+            <Image src={"/logo-symbol.webp"} width={150} height={100} alt="logo" className="absolute bottom-2 left-2 z-50 w-10 lg:w-40" />
             <Loader />
             <Suspense fallback={null}>
                 <Canvas shadows camera={{ position: [5, 0, 15], fov: 30 }} gl={{ antialias: true }}>
