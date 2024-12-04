@@ -2,13 +2,16 @@ import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { useGLTF, useAnimations, useTexture } from '@react-three/drei'
 import { applyProps } from '@react-three/fiber'
 import useStateStore from "@/stores/stateStore"
+import useColorStore from "@/stores/ColorStore";
 import * as THREE from 'three';
 
 export function Trailer(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/trailer.glb')
     const { actions } = useAnimations(animations, group);
-    const { colors, activeColor, woodColors, activeWoodColor } = useStateStore();
+    const { woodColors, activeWoodColor } = useStateStore();
+    const { colors, activeColor } = useColorStore();
+
 
     useEffect(() => {
         for (const key in actions) {
@@ -41,8 +44,8 @@ export function Trailer(props) {
     }, [activeColor])
 
     useLayoutEffect(() => {
-        applyProps(materials.body, { metallness: 0.5, roughness: 0.5});
-        applyProps(materials['Rubber_Rough_001_Black_50cm.001'], { roughness: 1.0, metallness : 0.0, color: "#444"})
+        applyProps(materials.body, { metallness: 0.5, roughness: 0.5 });
+        applyProps(materials['Rubber_Rough_001_Black_50cm.001'], { roughness: 1.0, metallness: 0.0, color: "#444" })
         woodColors.filter(color => color.name === activeWoodColor)[0].name === "black" ?
             applyProps(materials.floor_roof, { ...blackWood }) :
             applyProps(materials.floor_roof, { ...whiteWood });

@@ -1,9 +1,9 @@
 import React from 'react'
-import useStateStore from '@/stores/stateStore';
 import ColorOption from "@/components/ui/ColorOption";
+import useColorStore from '@/stores/ColorStore';
 
 const ExteriorColor = () => {
-    const { colors, activeColor, setActiveColor } = useStateStore();
+    const { colors, activeColor, setActiveColor } = useColorStore();
     return (
         <div className='flex flex-col gap-4 w-full'>
             <div className='flex flex-col items-center justify-center text-black/50'>
