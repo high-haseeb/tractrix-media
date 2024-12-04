@@ -3,8 +3,6 @@ import ExteriorColor from "@/components/sections/ExteriorColor";
 import InteriorColor from "@/components/sections/InteriorColor";
 import MovementAccessories from "@/components/sections/MovementAccessories";
 import UtilityAccessories from "@/components/sections/UtilityAccessories";
-import Stats from "@/components/sections/Stats"
-import Variants from "@/components/sections/Variants"
 import AdjustablePully from "@/components/sections/AdjustablePully"
 import AdjustableWeights from "@/components/sections/AdjustableWeights"
 import RoundStation from "@/components/sections/RoundStation"
@@ -12,7 +10,6 @@ import Barbel from "@/components/sections/Barbel"
 import AccountDetail from "@/components/sections/AccountDetail"
 import CardDetails from "@/components/sections/CardDetails"
 import ThankUpage from "@/components/sections/ThankUpage"
-import FinanceOptionSlider from "@/components/ui/FinanceOptionSlider"
 
 const useStateStore = create((set) => ({
 
@@ -21,38 +18,6 @@ const useStateStore = create((set) => ({
 export default useStateStore;
 
 export const useSectionsStore = create((set, get) => ({
-    mobileSections: [
-        {
-            name: "variants",
-            description: "test",
-            component:
-                (<>
-                    <Stats />
-                    <FinanceOptionSlider />
-                    <Variants />
-                </>)
-        },
-        {
-            name: "color",
-            description: "exterior color options",
-            component: <ExteriorColor />
-        },
-        {
-            name: "interior color",
-            description: "interior color options",
-            component: <InteriorColor />
-        },
-        {
-            name: "movement accessories",
-            description: "optinal accessories",
-            component: <MovementAccessories />
-        },
-        {
-            name: "utility accessories",
-            description: "optinal accessories",
-            component: <UtilityAccessories />
-        }
-    ],
     sections: [
         {
             name: "color",
@@ -102,24 +67,24 @@ export const useSectionsStore = create((set, get) => ({
             component: <AdjustablePully />,
             default: true
         },
-        {
-            name: "Card",
-            description: "Card Details",
-            component: <CardDetails />,
-            default: false
-        },
-        {
-            name: "Account",
-            description: "Account Details",
-            component: <AccountDetail />,
-            default: false
-        },
-        {
-            name: "Thanks",
-            description: "Thanks Page",
-            component: <ThankUpage />,
-            default: false
-        },
+        // {
+        //     name: "Card",
+        //     description: "Card Details",
+        //     component: <CardDetails />,
+        //     default: false
+        // },
+        // {
+        //     name: "Account",
+        //     description: "Account Details",
+        //     component: <AccountDetail />,
+        //     default: false
+        // },
+        // {
+        //     name: "Thanks",
+        //     description: "Thanks Page",
+        //     component: <ThankUpage />,
+        //     default: false
+        // },
     ],
     activeSectionIndex: 0,
     setActiveSectionIndex: (sectionIndex) => set(() => ({ activeSectionIndex: sectionIndex })),

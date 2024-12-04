@@ -10,19 +10,17 @@ import Footer from '@/components/ui/Footer';
 import FinanceOptionSlider from './ui/FinanceOptionSlider';
 
 const Configurator = () => {
-    const { sections, mobileSections, activeSectionIndex } = useSectionsStore();
-    const isMobile = useCheckMobile();
-    const activeSections = isMobile ? mobileSections : sections;
+    const { sections, activeSectionIndex } = useSectionsStore();
 
     return (
-        <div className='w-full h-full pt-20 flex flex-col items-center justify-between gap-0 relative'>
-            <div className='flex flex-col gap-6 w-full h-full overflow-y-scroll px-20 pb-10'>
+        <div className='w-full h-full flex flex-col items-center justify-between gap-0 relative'>
+            <div className='flex flex-col gap-6 w-full h-full overflow-y-scroll px-4 lg:px-20 pb-10 pt-20 '>
                 <Title />
                 <Stats />
                 <FinanceOptionSlider />
                 <Variants />
                 {
-                    activeSections[activeSectionIndex].component
+                    sections[activeSectionIndex].component
                 }
             </div>
             <Footer />

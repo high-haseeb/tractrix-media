@@ -1,18 +1,15 @@
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useSectionsStore } from "@/stores/stateStore";
-import useCheckMobile from "@/components/utils/isMobile";
 
 const CameraRig = ({ v = new THREE.Vector3() }) => {
-    const { activeSectionIndex, sections, mobileSections } = useSectionsStore();
+    const { activeSectionIndex, sections } = useSectionsStore();
     let xOffset = 0;
     let zOffset = 0;
     let yOffset = 0;
-    let workingSections = sections;
-    if(useCheckMobile()) workingSections = mobileSections  
     return useFrame((state) => {
         const t = state.clock.elapsedTime;
-        switch (workingSections[activeSectionIndex].name) {
+        switch (sections[activeSectionIndex].name) {
             case "color":
                 xOffset = 10;
                 zOffset = 14;
