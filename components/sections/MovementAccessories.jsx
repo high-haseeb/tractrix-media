@@ -12,8 +12,10 @@ const MovementAccessories = () => {
             </div>
             <div className='flex items-center justify-center gap-4'>
                 {
-                    movementArray.map((accessory, idx) => <CardOption key={idx} {...accessory} onCheck={addMovement} onUncheck={removeMovement} 
-                        checked={activeMovement.has(accessory.title)}/>)
+                    movementArray.map(
+                        (accessory, idx) =>
+                            <CardOption key={idx} {...accessory} onCheck={addMovement} onUncheck={removeMovement} checked={activeMovement.has(accessory.title)} />
+                    )
                 }
             </div>
             <ButtonModal title={"feature details"} details={movementArray} />

@@ -23,7 +23,7 @@ const Footer = () => {
     const currentVariant = variants.find((variant) => variant.name === activeVariantName);
 
     return (
-        <div className="w-full absolute bottom-0 shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white">
+        <div className="w-[80%] shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white z-50">
             <div>
                 <div className='text-2xl font-bold'>${currentVariant ? currentVariant.value[activeFinanceOption] : "please choose an option"}</div>
                 <div className='text-light text-black/50 text-base capitalize'>Sales tax not included</div>

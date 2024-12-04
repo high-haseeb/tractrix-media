@@ -15,17 +15,6 @@ import ThankUpage from "@/components/sections/ThankUpage"
 import FinanceOptionSlider from "@/components/ui/FinanceOptionSlider"
 
 const useStateStore = create((set) => ({
-    utilityAccessories: [
-        { title: "misting system", price: "2,500", detail: "On Both Sides" },
-        { title: "trailer stabilizer", price: "500", detail: "Four Units" },
-    ],
-
-    activeUtilityAccessories: [],
-    addUtilityAccessory: (accessory) => set(() => ({ activeUtilityAccessories: [...activeUtilityAccessories, accessory] })),
-    removeUtilityAccessory: (accessory) => set((state) => ({
-        activeUtilityAccessories: state.activeUtilityAccessories.filter(a => a !== accessory)
-    })),
-
 
 }));
 

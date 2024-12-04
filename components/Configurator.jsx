@@ -7,25 +7,25 @@ import Variants from "@/components/sections/Variants";
 import Stats from "@/components/sections/Stats";
 import useCheckMobile from "@/components/utils/isMobile";
 import Footer from '@/components/ui/Footer';
+import FinanceOptionSlider from './ui/FinanceOptionSlider';
 
 const Configurator = () => {
     const { sections, mobileSections, activeSectionIndex } = useSectionsStore();
     const isMobile = useCheckMobile();
     const activeSections = isMobile ? mobileSections : sections;
-    const containerPadding = activeSections[activeSectionIndex].name === "Thanks" ? "p-0" : "px-6 lg:px-20 lg:pt-12 pt-8";
 
     return (
-        <div className={`w-full h-full ${containerPadding} bg-white overflow-y-scroll overflow-x-hidden`}>
-            <div className="flex flex-col items-center justify-start lg:gap-8 gap-2 lg:relative h-full">
-                {activeSections[activeSectionIndex].name !== "Thanks" ? <Title /> : ""}
-                {activeSections[activeSectionIndex].default === true && (
-                    activeSections === sections ? mobileSections[0]?.component : null
-                )}
-                {activeSections[activeSectionIndex]?.component}
-                {["Account", "Card"].includes(activeSections[activeSectionIndex].name)
-                    ? <NewFooter activeSectionName={activeSections[activeSectionIndex].name} />
-                    : activeSections[activeSectionIndex].name === "Thanks" ? <></> : <Footer />}
+        <div className='w-full h-full pt-20 flex flex-col items-center justify-between gap-0 relative'>
+            <div className='flex flex-col gap-6 w-full h-full overflow-y-scroll px-20 pb-10'>
+                <Title />
+                <Stats />
+                <FinanceOptionSlider />
+                <Variants />
+                {
+                    activeSections[activeSectionIndex].component
+                }
             </div>
+            <Footer />
         </div>
     );
 };

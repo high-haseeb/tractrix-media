@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import Slider from "@/components/ui/Slider"
 import Image from 'next/image'
-import useStateStore from '@/stores/stateStore'
-// import WoodColorOption from '../ui/WoodColorOption'
+import useColorStore from '@/stores/ColorStore';
 
 function RoundStation() {
 
-    const { woodColors, activeWoodColor, setActiveWoodColor } = useStateStore();
+    const { woodColors, activeWoodColor, setActiveWoodColor } = useColorStore();
 
     return (
         <div className='flex flex-col gap-4 w-full'>

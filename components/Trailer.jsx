@@ -4,13 +4,14 @@ import { applyProps } from '@react-three/fiber'
 import useStateStore from "@/stores/stateStore"
 import useColorStore from "@/stores/ColorStore";
 import * as THREE from 'three';
+import useExtrasStore from '@/stores/ExtrasStore';
 
 export function Trailer(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/trailer.glb')
     const { actions } = useAnimations(animations, group);
-    const { colors, activeColor, woodColors, activeWoodColor  } = useColorStore();
-
+    const { colors, activeColor, woodColors, activeWoodColor } = useColorStore();
+    const { activeExtraItems } = useExtrasStore();
 
     useEffect(() => {
         for (const key in actions) {
@@ -46,7 +47,7 @@ export function Trailer(props) {
         applyProps(materials.body, { metallness: 0.5, roughness: 0.5 });
         applyProps(materials['Rubber_Rough_001_Black_50cm.001'], { roughness: 1.0, metallness: 0.0, color: "#444" })
         woodColors.filter(color => color.name === activeWoodColor)[0].name === "choclate cork" ?
-            applyProps(materials.floor_roof, { ...whiteWood }):
+            applyProps(materials.floor_roof, { ...whiteWood }) :
             applyProps(materials.floor_roof, { ...blackWood });
     }, [activeColor, materials, nodes, activeWoodColor]);
 
@@ -120,8 +121,13 @@ export function Trailer(props) {
                 <mesh name="walktop048" castShadow receiveShadow geometry={nodes.walktop048.geometry} material={materials['C_Gun_Metal_03.001']} position={[1.95, 5.015, 1.231]} rotation={[Math.PI / 2, 0, -1.525]} scale={0.21} />
                 <mesh name="walktop065" castShadow receiveShadow geometry={nodes.walktop065.geometry} material={materials['C_Gun_Metal_03.001']} position={[2.072, 5.011, -1.466]} rotation={[Math.PI / 2, 0, 1.572]} scale={0.21} />
                 <mesh name="walktop003" castShadow receiveShadow geometry={nodes.walktop003.geometry} material={materials['C_Iron_Corroded_Stained.001']} position={[-2.504, 0, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-                <mesh name="Stabilizer" castShadow receiveShadow geometry={nodes.Stabilizer.geometry} material={materials['C_Gun_Metal_03.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-                <mesh name="Stabilizer001" castShadow receiveShadow geometry={nodes.Stabilizer001.geometry} material={materials['C_Gun_Metal_03.001']} position={[0, 0, -6.581]} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+                {
+                    activeExtraItems.has("misting system") &&
+                    <>
+                        <mesh name="Stabilizer" castShadow receiveShadow geometry={nodes.Stabilizer.geometry} material={materials['C_Gun_Metal_03.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+                        <mesh name="Stabilizer001" castShadow receiveShadow geometry={nodes.Stabilizer001.geometry} material={materials['C_Gun_Metal_03.001']} position={[0, 0, -6.581]} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+                    </>
+                }
             </group>
         </group>
     )
