@@ -37,12 +37,6 @@ const useStateStore = create((set) => ({
         { name: "black", src: "dark", img: "/img/brown-wood.webp" },
         { name: "brown", src: "laminate", img: "/img/white-wood.webp" },
     ],
-    variants: [
-        { title: "the pinky", value: "84,990" },
-        { title: "the double", value: "89,990" },
-        { title: "the trio", value: "95,990" },
-        { title: "the chief", value: "99,990" },
-    ],
     stats: [
         { title: "operating", value: "2-3", unit: "hrs" },
         { title: "solar panels", value: "800", unit: "W" },
@@ -60,12 +54,8 @@ const useStateStore = create((set) => ({
     })),
 
 
-    activeColor: "true black",
-    setActiveColor: (color) => set(() => ({ activeColor: color })),
     activeWoodColor: "black",
     setActiveWoodColor: (woodColor) => set(() => ({ activeWoodColor: woodColor })),
-    activeVariant: "the pinky",
-    setActiveVariant: (variant) => set(() => ({ activeVariant: variant })),
 }));
 
 export default useStateStore;

@@ -6,6 +6,7 @@ import useStateStore, { useSectionsStore } from '@/stores/stateStore';
 import Variants from "@/components/sections/Variants";
 import Stats from "@/components/sections/Stats";
 import useCheckMobile from "@/components/utils/isMobile";
+import Footer from '@/components/ui/Footer';
 
 const Configurator = () => {
     const { sections, mobileSections, activeSectionIndex } = useSectionsStore();
@@ -16,14 +17,14 @@ const Configurator = () => {
     return (
         <div className={`w-full h-full ${containerPadding} bg-white overflow-y-scroll overflow-x-hidden`}>
             <div className="flex flex-col items-center justify-start lg:gap-8 gap-2 lg:relative h-full">
-                {activeSections[activeSectionIndex].name !== "Thanks" ?<Title/>:""}
+                {activeSections[activeSectionIndex].name !== "Thanks" ? <Title /> : ""}
                 {activeSections[activeSectionIndex].default === true && (
                     activeSections === sections ? mobileSections[0]?.component : null
                 )}
                 {activeSections[activeSectionIndex]?.component}
                 {["Account", "Card"].includes(activeSections[activeSectionIndex].name)
                     ? <NewFooter activeSectionName={activeSections[activeSectionIndex].name} />
-                    : activeSections[activeSectionIndex].name === "Thanks" ? <></>:<Footer/>}
+                    : activeSections[activeSectionIndex].name === "Thanks" ? <></> : <Footer />}
             </div>
         </div>
     );
@@ -33,42 +34,6 @@ const Title = () => (
     <div className="font-extrabold lg:text-4xl text-3xl w-full text-center">Trailer Uno</div>
 );
 
-const Footer = () => {
-    const { nextSection, prevSection, nextSectionMobile, prevSectionMobile, isFirstSection } = useSectionsStore();
-    const { variants, activeVariant } = useStateStore();
-    const isMobile = useCheckMobile();
-
-    const TextButton = ({ title, action }) => (
-        <button className="bg-black text-white px-12 font-bold rounded-full py-1 shadow shadow-black/40" onClick={action}>
-            {title}
-        </button>
-    );
-
-    const ImageButton = ({ imgUrl, action }) => (
-        <button className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2" onClick={action}>
-            <Image src={imgUrl} width={30} height={30} alt="navigation icon" />
-        </button>
-    );
-
-    const currentVariant = variants.find((s) => s.title === activeVariant);
-
-    return (
-        <div className="w-full absolute bottom-0 shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white">
-            <div>
-                <div className='text-2xl font-bold'>${currentVariant ? currentVariant.value : "0.000"}</div>
-                <div className='text-light text-black/50 text-base capitalize'>Sales tax not included</div>
-            </div>
-            {isFirstSection() ? (
-                <TextButton title="Next" action={isMobile ? nextSectionMobile : nextSection} />
-            ) : (
-                <div className="flex gap-4">
-                    <ImageButton imgUrl="/icons/left.svg" action={isMobile ? prevSectionMobile : prevSection} />
-                    <ImageButton imgUrl="/icons/right.svg" action={isMobile ? nextSectionMobile : nextSection} />
-                </div>
-            )}
-        </div>
-    );
-};
 
 const NewFooter = ({ activeSectionName }) => {
     const { nextSection, prevSection, nextSectionMobile, prevSectionMobile } = useSectionsStore();
