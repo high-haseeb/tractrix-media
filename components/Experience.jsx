@@ -5,8 +5,7 @@ import {
     Stage,
     Environment,
     Loader,
-    AccumulativeShadows,
-    RandomizedLight
+    Stats
 } from '@react-three/drei';
 
 import Image from "next/image";
@@ -18,7 +17,6 @@ import Sky from "@/components/Sky";
 import Ground from "@/components/Ground";
 import CameraRig from "@/components/CameraRig";
 import { useMovementStore } from "@/stores/stateStore";
-import { Bloom, BrightnessContrast, EffectComposer, ToneMapping } from "@react-three/postprocessing";
 
 const Experience = () => {
     return (
@@ -40,10 +38,11 @@ const Experience = () => {
                     <ambientLight intensity={0.5} />
                     <Environment environmentIntensity={1.5} preset="city" />
                     <CameraRig />
-                    <EffectComposer>
-                        <Bloom radius={0.001} />
-                        <BrightnessContrast contrast={0.15} />
-                    </EffectComposer>
+                    <Stats />
+                    {/* <EffectComposer> */}
+                        {/* <Bloom radius={0.001} /> */}
+                        {/* <BrightnessContrast contrast={0.15} /> */}
+                    {/* </EffectComposer> */}
 
                     <Sky />
                 </Canvas>

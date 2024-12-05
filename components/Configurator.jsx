@@ -1,8 +1,7 @@
 "use client";
 import React from 'react';
 import Image from 'next/image';
-import useStateStore, { useSectionsStore } from '@/stores/stateStore';
-
+import useSectionsStore from '@/stores/SectionStore';
 import Variants from "@/components/sections/Variants";
 import Stats from "@/components/sections/Stats";
 import useCheckMobile from "@/components/utils/isMobile";

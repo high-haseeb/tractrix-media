@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useSectionsStore } from "@/stores/stateStore";
+import useSectionsStore from "@/stores/SectionStore";
 
 const CameraRig = ({ v = new THREE.Vector3() }) => {
     const { activeSectionIndex, sections } = useSectionsStore();

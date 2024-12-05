@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useSectionsStore } from "@/stores/stateStore";
+import useSectionsStore from "@/stores/SectionStore";
 import useVariantStore from "@/stores/VariantStore";
 
 const Footer = () => {
@@ -25,10 +25,10 @@ const Footer = () => {
             ) : (
                 <div className="flex gap-4">
                     <button className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2" onClick={prevSection}>
-                        <Image src={"/icons/left.svg"} width={30} height={30} alt="navigation icon"  className="translate-x-1"/>
+                        <Image src={"/icons/left.svg"} width={30} height={30} alt="navigation icon" className="translate-x-1" />
                     </button>
                     <button className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2" onClick={nextSection}>
-                        <Image src={"/icons/right.svg"} width={30} height={30} alt="navigation icon" className=""/>
+                        <Image src={"/icons/right.svg"} width={30} height={30} alt="navigation icon" className="" />
                     </button>
                 </div>
             )}
