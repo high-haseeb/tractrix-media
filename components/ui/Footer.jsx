@@ -17,7 +17,9 @@ const Footer = () => {
     return (
         <div className="w-full lg:w-[80%] shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white z-50">
             <div>
-                <div className='text-2xl font-bold'>${currentVariant ? currentVariant.value[activeFinanceOption] : "please choose an option"}</div>
+                <div className='text-2xl font-bold'>${currentVariant.value[activeFinanceOption]}
+                    {activeFinanceOption === "finance" ? "/mo" : ""}
+                </div>
                 <div className='text-light text-black/50 text-sm lg:text-base capitalize'>Sales tax not included</div>
             </div>
             {isFirstSection() ? (
