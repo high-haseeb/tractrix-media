@@ -3,14 +3,10 @@ import ExteriorColor from "@/components/sections/ExteriorColor";
 import InteriorColor from "@/components/sections/InteriorColor";
 import MovementAccessories from "@/components/sections/MovementAccessories";
 import UtilityAccessories from "@/components/sections/UtilityAccessories";
-import AdjustablePully from "@/components/sections/AdjustablePully"
+import AdjustablePulley from "@/components/sections/AdjustablePully"
 import AdjustableWeights from "@/components/sections/AdjustableWeights"
 import RoundStation from "@/components/sections/RoundStation"
-import Barbel from "@/components/sections/Barbel"
-import AccountDetail from "@/components/sections/AccountDetail"
-import CardDetails from "@/components/sections/CardDetails"
-import ThankUpage from "@/components/sections/ThankUpage"
-import { edgeTable } from "three/examples/jsm/Addons.js";
+import Barbell from "@/components/sections/Barbel"
 
 const useSectionsStore = create((set, get) => ({
     sections: [
@@ -41,25 +37,25 @@ const useSectionsStore = create((set, get) => ({
         {
             name: "Equipments",
             description: "optinal accessories",
-            component: <Barbel />,
-            default: true
-        },
-        {
-            name: "Equipments",
-            description: "optinal accessories",
-            component: <RoundStation />,
-            default: true
-        },
-        {
-            name: "Equipments",
-            description: "optinal accessories",
             component: <AdjustableWeights />,
             default: true
         },
         {
             name: "Equipments",
             description: "optinal accessories",
-            component: <AdjustablePully />,
+            component: <AdjustablePulley />,
+            default: true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <Barbell />,
+            default: true
+        },
+        {
+            name: "Equipments",
+            description: "optinal accessories",
+            component: <RoundStation />,
             default: true
         },
         // {

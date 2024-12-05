@@ -1,41 +1,17 @@
-
 import React from 'react'
-import useStateStore from "@/stores/stateStore";
-import EquiCards from "@/components/ui/EquiCards"
+import Card from '@/components/ui/Card';
+import Slider from '@/components/ui/Slider';
+import ButtonModal from '../ui/ButtonModal';
+import Image from 'next/image';
 
-function Barbel() {
-  
-    const { utilityAccessories, activeMovementAccessories, addMovementAccessory, removeMovementAccessory } = useStateStore();
-
-
-    const item = [
-        {
-            name: "Barbell and Weights",
-            price: "$500",
-            dis:"10bs-45lbs (Set of 2) +1 Barbell",
-            img: "/img/babel.png"
-        }
-    ]
+const Barbell = () => {
     return (
-        <div className='flex flex-col gap-4 w-full'>
-            <div className='flex flex-col items-center justify-center'>
-                <div className='text-2xl text-black  font-semibold capitalize'>Equipments</div>
-            </div>
-            <div className='flex flex-col items-center justify-center gap-4'>
-                {/* {
-                    utilityAccessories.map((accessory, idx) => <CardOption key={idx} {...accessory} horizontal/>)
-                } */}
-                <EquiCards item={item}/>
-            </div>
-            {/* <ButtonModal title={"feature details"} details={accessories.filter((accessory) => accessory.title === activeAccessories)} /> */}
+        <div className='flex flex-col gap-6 mt-6'>
+            <Slider />
+            <Card imgSrc={() => <Image src={"/img/barbell.webp"} width={200} height={200} alt='adjustable_pulley' className='w-24 h-auto'/>} price={"500"} name={"Barbell and Weights"} details={"10bs-45lbs \n (Set of 2) +1 Barbell"} />
+            <ButtonModal title={'Feature Details'} details={''} />
         </div>
     )
 }
 
-export default Barbel
-
-
-
-
-
-
+export default Barbell;

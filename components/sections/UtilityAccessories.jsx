@@ -3,7 +3,6 @@ import Image from 'next/image';
 import useExtrasStore from "@/stores/ExtrasStore";
 
 const MovementAccessories = () => {
-    // const { utilityAccessories, activeMovementAccessories, addMovementAccessory, removeMovementAccessory } = useStateStore();
     const { extraItems, activeExtraItems, addExtraItem, removeExtraItem } = useExtrasStore();
     return (
         <div className='flex flex-col gap-4 w-full'>

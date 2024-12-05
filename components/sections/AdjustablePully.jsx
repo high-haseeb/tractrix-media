@@ -1,37 +1,18 @@
 import React from 'react'
-import useStateStore from "@/stores/stateStore";
-import ButtonModal from '@/components/ui/ButtonModal';
-import CardOption from '@/components/ui/CardOption';
-import EquiCards from "@/components/ui/EquiCards"
+import Card from '@/components/ui/Card';
+import Slider from '@/components/ui/Slider';
+import ButtonModal from '../ui/ButtonModal';
+import Image from 'next/image';
 
-const AdjustablePully = () => {
-    const { utilityAccessories, activeMovementAccessories, addMovementAccessory, removeMovementAccessory } = useStateStore();
-
-
-    const item = [
-        {
-            name: "Adjustable Pully",
-            price: "$1,000",
-            dis:"15lbs-45lbs Set of 2",
-            img: "/img/pngtree-pulley-with-a-metal-finish-and-a-metal-wheel-image_2935895.jpg"
-        }
-    ]
+const AdjustablePulley = () => {
     return (
-        <div className='flex flex-col gap-4 w-full'>
-            <div className='flex flex-col items-center justify-center'>
-                <div className='text-2xl text-black  font-semibold capitalize'>Equipments</div>
-            </div>
-            <div className='flex flex-col items-center justify-center gap-4'>
-                {/* {
-                    utilityAccessories.map((accessory, idx) => <CardOption key={idx} {...accessory} horizontal/>)
-                } */}
-                <EquiCards item={item}/>
-            </div>
-            {/* <ButtonModal title={"feature details"} details={accessories.filter((accessory) => accessory.title === activeAccessories)} /> */}
+        <div className='flex flex-col gap-6 mt-6'>
+            <Slider />
+            <Card imgSrc={() => <Image src={"/img/adjustable_pulley.webp"} width={200} height={200} alt='adjustable_pulley' className='rounded-full w-24 h-auto'/>} price={"1,000"} name={"Adjustable Pulley"} details={"15lbs-45lbs \n Set of 2"} />
+            <ButtonModal title={'Feature Details'} details={''} />
         </div>
     )
 }
 
-export default AdjustablePully;
-
+export default AdjustablePulley;
 
