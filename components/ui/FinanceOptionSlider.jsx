@@ -4,7 +4,7 @@ const FinanceOptionSlider = () => {
     const { activeFinanceOption, setActiveFinanceOption } = useVariantStore();
 
     const Option = ({ name }) => (
-        <button className={`capitalize ${activeFinanceOption === name ? "font-semibold border-b-black" : "font-light border-b-gray-300"} w-1/2 border-b-2 pb-2 transition-colors`} onClick={() => setActiveFinanceOption(name)}>
+        <button className={`capitalize ${activeFinanceOption === name ? "font-semibold border-b-black" : "font-light border-b-gray-300"} lg:text-base text-sm w-1/2 border-b-2 pb-2 transition-colors`} onClick={() => setActiveFinanceOption(name)}>
             {name}
         </button>
     )

@@ -11,7 +11,6 @@ import {
 import Image from "next/image";
 import { Canvas } from "@react-three/fiber";
 import { Trailer } from "@/components/Trailer";
-import { Valut } from "@/components/Valut";
 import { ValutManual } from "@/components/ValutManual";
 import Sky from "@/components/Sky";
 import Ground from "@/components/Ground";
@@ -31,13 +30,13 @@ const Experience = () => {
                         <Trailer scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} />
                         <MovementModels />
                     </Stage>
-                    <Ground positionY={-3.0} />
+                    <Ground positionY={-2.45} />
                     <OrbitControls enableZoom={true} enablePan={false} />
-                    <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
-                    <directionalLight position={[10, 100, 10]} color={'darkblue'} />
-                    <ambientLight intensity={0.5} />
+                    <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={4} shadow-bias={-0.0001} />
+                    <directionalLight position={[0, 100, 0]} color={'white'} intensity={2.0}/>
+                    <ambientLight intensity={1.5} />
                     <Environment environmentIntensity={1.5} preset="city" />
-                    <CameraRig />
+                    {/* <CameraRig /> */}
                     <Stats />
                     {/* <EffectComposer> */}
                         {/* <Bloom radius={0.001} /> */}
@@ -54,12 +53,6 @@ const MovementModels = () => {
     const { activeMovement } = useMovementStore();
     return (
         <>
-            {
-                activeMovement.has("trailer valet") ? <Valut scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} /> : null
-            }
-            {
-                activeMovement.has("trailer dolly") ? <ValutManual scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} /> : null
-            }
         </>
     )
 }

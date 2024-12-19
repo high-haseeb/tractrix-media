@@ -34,7 +34,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
     return (
         <mesh >
-            <sphereGeometry args={[50, 32, 15]} />
+            <sphereGeometry args={[30, 32, 15]} />
             <shaderMaterial fragmentShader={fragShader} vertexShader={vertShader} uniforms={uniforms} side={THREE.BackSide} />
         </mesh >
     )

@@ -17,14 +17,14 @@ function RoundStation() {
                     utilityAccessories.map((accessory, idx) => <CardOption key={idx} {...accessory} horizontal/>)
                 } */}
                 {/* <EquiCards item={item}/> */}
-                <Slider/>
+                <Slider />
                 <div className='flex w-full gap-4'>
-                <div className='w-1/2'><Card/></div>
-                <div className='flex w-1/2 items-center justify-center gap-1'>
-                {
-                    woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.src} active={activeWoodColor} setActive={setActiveWoodColor} key={idx}/>)
-                }
-            </div>
+                    <div className='w-1/2'><Card /></div>
+                    <div className='flex w-1/2 items-center justify-center gap-1'>
+                        {
+                            woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.src} active={activeWoodColor} setActive={setActiveWoodColor} key={idx} />)
+                        }
+                    </div>
                 </div>
             </div>
             {/* <ButtonModal title={"feature details"} details={accessories.filter((accessory) => accessory.title === activeAccessories)} /> */}
@@ -44,16 +44,16 @@ const WoodColorOption = ({ title, value, active, setActive }) => (
         onClick={() => { setActive(title) }}
     >
         <div className='w-20 h-20 rounded-full shadow shadow-black/20' >
-            <Image src={`/textures/wood/${value}/diff.jpg`} height={1024} width={1024} alt={title} className="w-20 h-20 rounded-full shadow shadow-black/20"/>
+            <Image src={`/textures/wood/${value}/diff.jpg`} height={1024} width={1024} alt={title} className="w-20 h-20 rounded-full shadow shadow-black/20" />
         </div>
     </div>
 );
 
 
 
-const Card=()=>{
-    const [selected,setSelected]=useState(false)
-    return(
+const Card = () => {
+    const [selected, setSelected] = useState(false)
+    return (
         <div
             className='flex w-auto border border-[#707070] rounded-[30px] p-1 items-center justify-between relative cursor-pointer'
             onClick={() => setSelected(!selected)}
@@ -76,6 +76,6 @@ const Card=()=>{
 
 
 
-    
+
 
 

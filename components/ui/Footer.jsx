@@ -7,7 +7,7 @@ const Footer = () => {
     const { variants, activeVariantName, activeFinanceOption } = useVariantStore();
 
     const TextButton = ({ title, action }) => (
-        <button className="bg-black text-white px-12 font-bold rounded-full py-1 shadow shadow-black/40" onClick={action}>
+        <button className="bg-black text-white px-12 font-bold text-sm rounded-full py-1 shadow shadow-black/40" onClick={action}>
             {title}
         </button>
     );
@@ -17,10 +17,10 @@ const Footer = () => {
     return (
         <div className="w-full lg:w-[80%] shadow shadow-black/80 px-6 py-4 flex justify-between items-center bg-white z-50">
             <div>
-                <div className='text-2xl font-bold'>${currentVariant.value[activeFinanceOption]}
-                    {activeFinanceOption === "finance" ? "/mo" : ""}
+                <div className='text-xl lg:text-2xl font-bold'>${currentVariant.value[activeFinanceOption]}
+                    <span className="text-xl text-black/80 lg:text-2xl">{activeFinanceOption === "finance" ? " /mo" : ""}</span>
                 </div>
-                <div className='text-light text-black/50 text-sm lg:text-base capitalize'>Sales tax not included</div>
+                <div className='text-light text-black/50 text-xs lg:text-base capitalize'>Sales tax not included</div>
             </div>
             {isFirstSection() ? (
                 <TextButton title="Next" action={nextSection} />

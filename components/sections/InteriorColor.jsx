@@ -8,9 +8,9 @@ const InteriorColor = () => {
     return (
         <div className='flex flex-col gap-4 w-full'>
             <div className='flex flex-col items-center justify-center text-black/50'>
-                <div className='font-light text-xl'>INCLUDED</div>
-                <div className='font-base text-base capitalize'>interior color options</div>
-                <div className='font-semibold text-xl capitalize w-full text-center text-black'>{activeWoodColor}</div>
+                <div className='font-light text-base lg:text-xl'>INCLUDED</div>
+                <div className='font-base text-sm lg:text-base capitalize'>exterior color options</div>
+                <div className='font-semibold text-lg lg:text-xl capitalize w-full text-center text-black mt-2'>{activeWoodColor}</div>
             </div>
             <div className='flex items-center justify-center'>
                 {
