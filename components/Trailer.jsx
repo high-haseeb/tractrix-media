@@ -102,7 +102,7 @@ export function Trailer(props) {
                 <mesh name="walktop049" castShadow receiveShadow geometry={nodes.walktop049.geometry} material={materials['C_Gun_Metal_03.001']} />
                 <mesh name="walktop049_1" castShadow receiveShadow geometry={nodes.walktop049_1.geometry} material={materials['Iron_Cast_01_1.001']} />
                 <mesh name="walktop049_2" castShadow receiveShadow geometry={nodes.walktop049_2.geometry} material={materials['Starry_Night_Paracord.001']} />
-                {/* <mesh name="walktop049_3" castShadow receiveShadow geometry={nodes.walktop049_3.geometry} material={materials.Logo} /> */}
+                <mesh name="walktop049_3" castShadow receiveShadow geometry={nodes.walktop049_3.geometry} material={materials.Logo} />
                 <mesh name="walktop049_4" castShadow receiveShadow geometry={nodes.walktop049_4.geometry} material={materials['C_Aluminum_Damaged.001']} />
                 <mesh name="walktop049_5" castShadow receiveShadow geometry={nodes.walktop049_5.geometry} material={materials['Dark_Specks_Paracord.001']} />
             </group>
@@ -112,7 +112,7 @@ export function Trailer(props) {
                 <mesh name="walktop052_2" castShadow receiveShadow geometry={nodes.walktop052_2.geometry} material={materials['Iron_Cast_01_1.001']} />
                 <mesh name="walktop052_3" castShadow receiveShadow geometry={nodes.walktop052_3.geometry} material={materials['Rubber_Grip_01_2.001']} />
                 <mesh name="walktop052_4" castShadow receiveShadow geometry={nodes.walktop052_4.geometry} material={materials['Dark_Specks_Paracord.001']} />
-                {/* <mesh name="walktop052_5" castShadow receiveShadow geometry={nodes.walktop052_5.geometry} material={materials.Logo} /> */}
+                <mesh name="walktop052_5" castShadow receiveShadow geometry={nodes.walktop052_5.geometry} material={materials.Logo} />
             </group>
             <mesh name="walktop017" castShadow receiveShadow geometry={nodes.walktop017.geometry} material={materials['C_Gun_Metal_03.001']} position={[-2.03, 2.443, -1.469]} rotation={[Math.PI / 2, 0, -1.563]} scale={0.21} />
             <group name="walktop018" position={[-2.177, 5.634, 0]} rotation={[Math.PI / 2, 1.397, 0]} scale={0.21}>
