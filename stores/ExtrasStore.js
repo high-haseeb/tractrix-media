@@ -5,7 +5,7 @@ const useExtrasStore = create((set) => ({
         { title: "misting system", price: "2,500", detail: "On Both Sides" },
         { title: "trailer stabilizer", price: "500", detail: "Four Units" },
     ],
-    activeExtraItems: new Set(["trailer stabilizer"]),
+    activeExtraItems: new Set([]),
     addExtraItem: (extra) =>
         set((state) => {
             const updatedSet = new Set(state.activeExtraItems);
