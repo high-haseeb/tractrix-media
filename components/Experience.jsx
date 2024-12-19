@@ -7,6 +7,7 @@ import {
     Loader,
     Stats
 } from '@react-three/drei';
+import { Vector3 } from 'three';
 
 import Image from "next/image";
 import { Canvas } from "@react-three/fiber";
@@ -16,6 +17,7 @@ import Sky from "@/components/Sky";
 import Ground from "@/components/Ground";
 import CameraRig from "@/components/CameraRig";
 import { useMovementStore } from "@/stores/stateStore";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const Experience = () => {
     return (
@@ -25,7 +27,7 @@ const Experience = () => {
             <Loader />
             <Suspense fallback={null}>
                 <Canvas shadows camera={{ position: [5, 0, 15], fov: 30 }} gl={{ antialias: true }}>
-                    <fog color={0x00008B} near={2} far={100} attach={'fog'} />
+                    {/* <fog color={'blue'} near={2} far={100} attach={'fog'} /> */}
                     <Stage preset="upfront" center={{ disableX: true, disableZ: true }} adjustCamera={false} >
                         <Trailer scale={0.8} position={[0, 0, 0]} rotation={[0, 0, 0]} />
                         <MovementModels />
@@ -33,14 +35,13 @@ const Experience = () => {
                     <Ground positionY={-2.45} />
                     <OrbitControls enableZoom={true} enablePan={false} />
                     <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={4} shadow-bias={-0.0001} />
-                    <directionalLight position={[0, 100, 0]} color={'white'} intensity={2.0}/>
+                    <directionalLight castShadow position={[10, 100, 10]} color={'white'} intensity={2.0} lookAt={new Vector3()}/>
                     <ambientLight intensity={1.5} />
                     <Environment environmentIntensity={1.5} preset="city" />
                     {/* <CameraRig /> */}
                     <Stats />
                     {/* <EffectComposer> */}
-                        {/* <Bloom radius={0.001} /> */}
-                        {/* <BrightnessContrast contrast={0.15} /> */}
+                    {/*     <Bloom luminanceThreshold={1.2}/> */}
                     {/* </EffectComposer> */}
 
                     <Sky />

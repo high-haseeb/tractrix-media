@@ -52,6 +52,7 @@ export function Trailer(props) {
         applyProps(materials.D_Bumpy_Plastic, { roughness: 0.5, metallness: 0.4, color: "#222" });
         applyProps(materials.D_Bumpy_Plastic_2, { roughness: 1.0, metallness: 0.0, color: "#000" });
         applyProps(materials.D_Bumpy_Plastic_1, { roughness: 0.5, metallness: 0.4, color: "#222" });
+        applyProps(materials.Neon_Red, { emmisive: 200.0 });
         woodColors.filter(color => color.name === activeWoodColor)[0].name === "choclate cork" ?
             applyProps(materials.floor_roof, { ...ashWood }) :
             applyProps(materials.floor_roof, { ...walnutWood });
