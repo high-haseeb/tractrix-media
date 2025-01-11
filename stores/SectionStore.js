@@ -7,9 +7,14 @@ import AdjustablePulley from "@/components/sections/AdjustablePully"
 import AdjustableWeights from "@/components/sections/AdjustableWeights"
 import RoundStation from "@/components/sections/RoundStation"
 import Barbell from "@/components/sections/Barbel"
+import AccountDetail from "@/components/sections/AccountDetail"
+import ThankUpage from "@/components/sections/ThankUpage";
+import DynamicCard from "@/components/sections/DynamicCard"
+import CardDetails from "@/components/sections/CardDetails";
 
 const useSectionsStore = create((set, get) => ({
     sections: [
+        
         {
             name: "color",
             description: "exterior color options",
@@ -43,7 +48,7 @@ const useSectionsStore = create((set, get) => ({
         {
             name: "Equipments",
             description: "optinal accessories",
-            component: <AdjustablePulley />,
+            component: <AdjustablePulley/>,
             default: true
         },
         {
@@ -52,30 +57,42 @@ const useSectionsStore = create((set, get) => ({
             component: <Barbell />,
             default: true
         },
-        {
-            name: "Equipments",
-            description: "optinal accessories",
-            component: <RoundStation />,
-            default: true
-        },
+        // {
+        //     name: "Equipments",
+        //     description: "optinal accessories",
+        //     component: <RoundStation />,
+        //     default: true
+        // },
         // {
         //     name: "Card",
         //     description: "Card Details",
         //     component: <CardDetails />,
-        //     default: false
+        //     default: true
         // },
-        // {
-        //     name: "Account",
-        //     description: "Account Details",
-        //     component: <AccountDetail />,
-        //     default: false
-        // },
-        // {
-        //     name: "Thanks",
-        //     description: "Thanks Page",
-        //     component: <ThankUpage />,
-        //     default: false
-        // },
+        {
+            name: "Card",
+            description: "exterior color options",
+            component: <DynamicCard/>,
+            default: true
+        },
+        {
+            name: "Account",
+            description: "Account Details",
+            component: <AccountDetail/>,
+            default: true
+        },
+        {
+            name: "Payment Card",
+            description: "Card Details",
+            component: <CardDetails/>,
+            default: true
+        },
+        {
+            name: "Thanks",
+            description: "Thanks Page",
+            component: <ThankUpage />,
+            default: true
+        },
     ],
     activeSectionIndex: 0,
     setActiveSectionIndex: (sectionIndex) => set(() => ({ activeSectionIndex: sectionIndex })),

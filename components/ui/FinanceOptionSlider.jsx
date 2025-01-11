@@ -17,3 +17,6 @@ const FinanceOptionSlider = () => {
 }
 
 export default FinanceOptionSlider
+
+
+

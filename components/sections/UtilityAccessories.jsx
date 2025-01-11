@@ -28,6 +28,7 @@ const CardOption = ({ title, price, detail, onCheck, onUncheck, checked }) => {
                 () => {
                     setSelected(s => !s);
                     !selected ? onCheck(title) : onUncheck(title);
+                    console.log(title,price)
                 }}
         >
             <div className='flex gap-4'>
@@ -40,7 +41,7 @@ const CardOption = ({ title, price, detail, onCheck, onUncheck, checked }) => {
                 </div>
             </div>
             <div className='font-semibold text-lg text-[#707070]'>${price}</div>
-        </div >
+        </div>
     )
 }
 

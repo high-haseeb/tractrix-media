@@ -1,9 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-
+import useExtrasStore from "@/stores/ExtrasStore"
+// Adjustable Weights
 const Card = ({ imgSrc, price, name, details }) => {
     const [checked, setChecked] = useState(false);
+    const {setPriceWeights}=useExtrasStore()
+    console.log(checked)
+    useEffect(()=>{
+        if(checked){
+            setPriceWeights(1000)
+        }else{
+            setPriceWeights(0)
+        }
+    },[checked])
     return(
         <div className="flex flex-row items-center justify-around w-full h-auto p-4 rounded-[34px] border-2 border-black/20">
             <button className="flex items-center justify-center bg-gray-300 rounded-2xl w-10 h-10" onClick={() => setChecked(state => !state)}>

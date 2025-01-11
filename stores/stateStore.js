@@ -1,10 +1,4 @@
-import { create } from 'zustand'
-
-const useStateStore = create((set) => ({
-
-}));
-
-export default useStateStore;
+import { create } from 'zustand';
 
 export const useMovementStore = create((set) => ({
     movementArray: [
@@ -13,9 +7,19 @@ export const useMovementStore = create((set) => ({
         { title: "trailer valet", price: "5,000", detail: "9,000 lbs Towing Remote Controlled", img: "valet.webp" },
     ],
     activeMovement: new Set(["trailer jack"]),
-    addMovement: (accessory) => set((state) => ({ activeMovement: state.activeMovement.add(accessory) })),
-    removeMovement: (accessory) => set((state) => ({ activeMovementAccessories: state.activeMovement.delete(accessory) })),
+    totalMovementPrice: 0,
+    addMovement: (accessory) => set((state) => {
+        state.activeMovement.add(accessory);
+        const newTotal = state.movementArray
+            .filter(item => state.activeMovement.has(item.title))
+            .reduce((sum, item) => sum + parseFloat(item.price.replace(',', '')), 0);
+        return { activeMovement: new Set(state.activeMovement), totalMovementPrice: newTotal };
+    }),
+    removeMovement: (accessory) => set((state) => {
+        state.activeMovement.delete(accessory);
+        const newTotal = state.movementArray
+            .filter(item => state.activeMovement.has(item.title))
+            .reduce((sum, item) => sum + parseFloat(item.price.replace(',', '')), 0);
+        return { activeMovement: new Set(state.activeMovement), totalMovementPrice: newTotal };
+    }),
 }));
-
-
-

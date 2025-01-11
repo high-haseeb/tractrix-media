@@ -34,21 +34,21 @@ const ButtonModal = ({ items }) => {
                 </button>
             </div>
             {modalOpen &&
-                <div className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen pointer-events-none bg-black/40 flex items-center justify-center z-50'>
-                    <div className="bg-[#E8E8E8] text-[#707070] w-1/2 h-1/2 rounded-3xl flex flex-row pointer-events-auto relative" >
-                        <div className='w-2/3 h-full py-8 px-6 flex justify-between'>
+                <div className='fixed top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 w-screen h-screen pointer-events-none bg-black/40 flex items-center justify-center z-50'>
+                    <div className="bg-[#E8E8E8] text-[#707070] w-auto h-auto rounded-3xl flex flex-row pointer-events-auto relative" >
+                        <div className='py-8 px-6 flex lg:gap-6 gap-2 justify-between'>
                             {
                                 items.map(item => (
-                                    <div>
-                                        <div className='w-40 h-40'>
+                                    <div className='flex flex-col items-center justify-center'>
+                                        <div className='lg:w-40 w-24 h-24 lg:h-40'>
                                             <Image src={item.img} className='w-full h-full object-cover rounded-full' alt='image' width={200} height={200} />
                                         </div>
-                                        <div className='font-bold text-4xl text-black capitalize'>{item.name}</div>
+                                        <div className='font-bold lg:text-3xl text-lg text-black capitalize'>{item.name}</div>
                                     </div>
                                 ))
                             }
                         </div>
-                        <Image src={'/icons/close.svg'} width={50} height={50} alt='close' className='cursor-pointer absolute top-4 right-4' onClick={() => setModalOpen(false)} />
+                        <Image src={'/icons/close.svg'} width={50} height={50} alt='close' className='cursor-pointer absolute top-4 right-4 w-6 h-6 lg:w-10 lg:h-10 ' onClick={() => setModalOpen(false)} />
                     </div>
                 </div>
             }

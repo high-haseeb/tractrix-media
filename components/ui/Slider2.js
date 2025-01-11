@@ -1,24 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import useExtrasStore from "@/stores/ExtrasStore";
 
-function Slider({ max = 5 }) {
+function Slider2({ max = 2 }) {
     const [value, setValue] = useState(0);
     const sliderRef = useRef(null);
-    const { totalPriceWeight, setActiceWeights, activeWeights } = useExtrasStore();
+    const { barbellWeightPrice, setActiveBarbell, activeBarbell } = useExtrasStore();
 
     useEffect(() => {
-        if (totalPriceWeight > 0) {
-            setValue(1);
+        if (barbellWeightPrice > 0) {
+            setValue(1); 
         } else {
             setValue(0); 
         }
-    }, [totalPriceWeight]); 
+    }, [barbellWeightPrice]);
 
     useEffect(() => {
-        if (value >= 1 && value !== activeWeights) {
-            setActiceWeights(value); 
+        if (value >= 1 && value !== activeBarbell) {
+            setActiveBarbell(value); 
         }
-    }, [value, activeWeights]);
+    }, [value, activeBarbell, setActiveBarbell]);
 
     const calculateValue = (clientX) => {
         const sliderRect = sliderRef.current.getBoundingClientRect();
@@ -85,4 +85,4 @@ function Slider({ max = 5 }) {
     );
 }
 
-export default Slider;
+export default Slider2;
