@@ -5,7 +5,6 @@ import {
     Stage,
     Environment,
     Loader,
-    Stats
 } from '@react-three/drei';
 import { Vector3 } from 'three';
 
@@ -39,7 +38,7 @@ const Experience = () => {
                     <ambientLight intensity={1.5} />
                     <Environment environmentIntensity={1.5} preset="city" />
                     <CameraRig />
-                    <Stats />
+                    {/* <Stats /> */}
                     {/* <EffectComposer> */}
                     {/*     <Bloom luminanceThreshold={1.2}/> */}
                     {/* </EffectComposer> */}

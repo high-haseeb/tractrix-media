@@ -1,24 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import useExtrasStore from "@/stores/ExtrasStore";
 
-function Slider({ max = 5 }) {
+function Slider1({ max = 2 }) {
     const [value, setValue] = useState(0);
     const sliderRef = useRef(null);
-    const { totalPriceWeight, setActiceWeights, activeWeights } = useExtrasStore();
+    const { pullyPrice, setActivePully, activePully } = useExtrasStore();
 
     useEffect(() => {
-        if (totalPriceWeight > 0) {
-            setValue(1);
+        if (pullyPrice > 0) {
+            setValue(1);  // If pullyPrice is greater than 0, set the value to 1
         } else {
-            setValue(0); 
+            setValue(0);  // If pullyPrice is 0, set the value to 0
         }
-    }, [totalPriceWeight]); 
+    }, [pullyPrice]);  // Listen for changes in pullyPrice
 
     useEffect(() => {
-        if (value >= 1 && value !== activeWeights) {
-            setActiceWeights(value); 
+        if (value >= 1 && value !== activePully) {
+            setActivePully(value); // Update activePully when value changes
         }
-    }, [value, activeWeights]);
+    }, [value, activePully, setActivePully]);
 
     const calculateValue = (clientX) => {
         const sliderRect = sliderRef.current.getBoundingClientRect();
@@ -66,7 +66,7 @@ function Slider({ max = 5 }) {
                 max={max}
                 step={1}
                 value={value}
-                onChange={(e) => setValue(Number(e.target.value))}
+                onChange={(e) => setValue(Number(e.target.value))} 
                 className="w-full opacity-0 z-50 absolute top-1/2 -translate-y-1/2 left-0"
             />
             <div
@@ -85,4 +85,4 @@ function Slider({ max = 5 }) {
     );
 }
 
-export default Slider;
+export default Slider1;

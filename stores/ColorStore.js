@@ -22,7 +22,7 @@ const useColorStore = create((set) => ({
 
     woodColors: [
         { name: "natural cork",  src: "laminate", img: "/img/white-wood.webp" },
-        { name: "choclate cork", src: "choclate", img: "/img/dark-wood.webp" },
+        { name: "choclate cork", src: "choclate", img: "/img/dark-wood.webp"},
     ],
     activeWoodColor: "natural cork",
     setActiveWoodColor: (woodColor) => set(() => ({ activeWoodColor: woodColor })),

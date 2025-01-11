@@ -51,10 +51,9 @@ const useVariantStore = create((set) => ({
             }
         }
     ],
-
     activeVariantName: "the pinky",
     setActiveVariant: (variantName) => set(() => ({ activeVariantName: variantName })),
-    activeFinanceOption: "finance",
+    activeFinanceOption: "cash",
     setActiveFinanceOption: (financeOption) => set(() => ({ activeFinanceOption: financeOption })),
 }));
 
