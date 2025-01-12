@@ -19,8 +19,11 @@ const DynamicCard = () => {
     activePully,
     barbellWeightPrice,
     activeBarbell,
+    activeMats,   
+    matPrice,     
   } = useExtrasStore();
   const { totalMovementPrice, movementArray, activeMovement } = useMovementStore();
+
 
   let total = 0;
   const activeVariant = variants.find(
@@ -34,7 +37,8 @@ const DynamicCard = () => {
       totalpriceExtra +
       totalPriceWeight * activeWeights +
       pullyPrice * activePully +
-      barbellWeightPrice * activeBarbell;
+      barbellWeightPrice * activeBarbell +
+      matPrice * activeMats; 
   } else {
     total = Math.round(
       Number(activeVariant.value.finance.replace(/,/g, "")) +
@@ -42,7 +46,8 @@ const DynamicCard = () => {
       totalpriceExtra / 72 +
       (totalPriceWeight * activeWeights) / 72 +
       (pullyPrice * activePully) / 72 +
-      (barbellWeightPrice * activeBarbell) / 72
+      (barbellWeightPrice * activeBarbell) / 72 +
+      (matPrice * activeMats) / 72 
     );
   }
 
@@ -50,17 +55,20 @@ const DynamicCard = () => {
     activeExtraItems.has(item.title)
   );
 
-  // Trailer-specific extras
   const trailerExtras = [
     "Trailer Jack",
     "Trailer Dolly",
     "Trailer Valet",
   ].filter((item) => activeExtraItems.has(item));
 
-  // Selected movement accessories
   const selectedMovementAccessories = movementArray.filter((item) =>
     activeMovement.has(item.title)
   );
+
+
+
+
+
 
   return (
     <div> 
@@ -134,6 +142,13 @@ const DynamicCard = () => {
             {activeBarbell > 0 && (
               <li>Barbell {activeBarbell}</li>
             )}
+            {activeMats > 0 && (
+              <li>
+                {activeMats === 1
+                  ? "Mat 1"
+                  : `Mats ${activeMats}`}
+              </li>
+            )}
           </ul>
         </div>
 
@@ -154,12 +169,12 @@ const DynamicCard = () => {
           <p className="font-bold text:text-xl text:lg text-right">Due Today:</p>
           <p className="lg:text-base text-right text-sm">Non Refundable</p>
           <div>{activeFinanceOption === "finance" ? '6% APR, 72 months' : ''}</div>
-
         </div>
         <div className="lg:text-xl text-lg font-bold">$3,000</div>
       </div>
     </div>
   );
 };
+
 
 export default DynamicCard;

@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import useExtrasStore from "@/stores/ExtrasStore";
 
 function Slider({ max = 5 }) {
-    const [value, setValue] = useState(0);
     const sliderRef = useRef(null);
     const { totalPriceWeight, setActiceWeights, activeWeights } = useExtrasStore();
+    const [value, setValue] = useState(activeWeights);
 
     useEffect(() => {
         if (totalPriceWeight > 0) {
@@ -19,6 +19,12 @@ function Slider({ max = 5 }) {
             setActiceWeights(value); 
         }
     }, [value, activeWeights]);
+
+    useEffect(()=>{
+        if (activeWeights) {
+            setValue(activeWeights)
+        }
+    },[activeWeights])
 
     const calculateValue = (clientX) => {
         const sliderRect = sliderRef.current.getBoundingClientRect();

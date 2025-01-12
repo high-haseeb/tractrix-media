@@ -4,15 +4,17 @@ import useExtrasStore from "@/stores/ExtrasStore";
 
 const Card2 = ({ imgSrc, price, name, details }) => {
     const [checked, setChecked] = useState(false);
-    const { setBarbellPrice,barbellWeightPrice } = useExtrasStore();
+    const { setBarbellPrice,barbellWeightPrice,setBarbellState} = useExtrasStore();
 
     useEffect(() => {
         if (checked) {
             setBarbellPrice(500); 
+            setBarbellState(true);
+            
         } else {
             setBarbellPrice(0);
+            setBarbellState(false);
         }
-        console.log(barbellWeightPrice)
     }, [checked, setBarbellPrice]);
 
     return (

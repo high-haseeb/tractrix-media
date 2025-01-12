@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, useTexture } from '@react-three/drei'
 import { applyProps } from '@react-three/fiber'
 import useColorStore from "@/stores/ColorStore";
@@ -8,13 +8,32 @@ import PullupBar from "@/components/accessories/PullupBar";
 import Dolly from "@/components/accessories/Dolly";
 import { Valut } from "@/components/Valut";
 import { useMovementStore } from '@/stores/stateStore';
+import YogaMat from '@/components/YogaMat';
+// import useExtrasStore from "@/stores/ExtrasStore"
 
 export function Trailer(props) {
+    // const [barbel,setBarbel]=useState(false);
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/trailer.glb')
     const { actions } = useAnimations(animations, group);
     const { colors, activeColor, woodColors, activeWoodColor } = useColorStore();
-    const { activeExtraItems } = useExtrasStore();
+    const { activeExtraItems,barbellState} = useExtrasStore();
+
+
+    // useEffect(() => {
+    //     if (barbellWeightPrice > 0) {
+    //         setBarbel(true);
+    //     } else {
+    //         setBarbel(false);
+    //     }
+
+    //     console.log("barbellWeightPrice:", barbellWeightPrice);
+    // }, [barbellWeightPrice]); 
+
+
+    // useEffect(() => {
+    //     console.log("barbel state updated:", barbel);
+    // }, [barbel]); 
 
     useEffect(() => {
         for (const key in actions) {
@@ -139,10 +158,12 @@ export function Trailer(props) {
                 </>
             }
             <Jack visible={activeMovement.has("trailer jack")} />
-            {/* barbell */}
+            
             <PullupBar materials={materials} scale={0.02345} />
             <Dolly materials={materials} scale={0.02345} visible={activeMovement.has("trailer dolly")} />
             <Valut scale={0.8} position={[1, 0, 0]} rotation={[0, 0, 0]} visible={activeMovement.has("trailer valet")} />
+            {barbellState && <PullupBar materials={materials} scale={0.02345} position={[8.8,-0.5, 1.5]}/>}
+            {/* <YogaMat scale={2} position={[5, 1.9, 2.5]}/> */}
         </group>
     )
 }
