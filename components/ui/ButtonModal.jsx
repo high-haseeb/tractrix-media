@@ -12,6 +12,11 @@ const ButtonModal = ({ title, details }) => {
             details[0]?.title === "Adjustable Pulley" ||
             details[0]?.title === "Barbell and Weights"
         ) {
+            if(details[0]?.title === "Barbell and Weights")
+            {
+            setOriant(["lg:flex-row flex-col", "w-full", "lg:h-full h-1/2"]);
+                return;
+            }
             setOriant(["lg:flex-row flex-col", "w-full", "h-full"]);
             if (details[0]?.title === "Adjustable Pulley") {
                 setOriant(["lg:flex-row flex-col", "w-full", "h-1/2"]);

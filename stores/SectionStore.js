@@ -11,6 +11,7 @@ import AccountDetail from "@/components/sections/AccountDetail"
 import ThankUpage from "@/components/sections/ThankUpage";
 import DynamicCard from "@/components/sections/DynamicCard"
 import CardDetails from "@/components/sections/CardDetails";
+import YogaMat from "@/components/sections/YogaMats"
 
 const useSectionsStore = create((set, get) => ({
     sections: [
@@ -54,9 +55,16 @@ const useSectionsStore = create((set, get) => ({
         {
             name: "Equipments",
             description: "optinal accessories",
+            component: <YogaMat/>,
+            default: true
+        },
+        {
+            name: "Barbell",
+            description: "optinal accessories",
             component: <Barbell />,
             default: true
         },
+        
         // {
         //     name: "Equipments",
         //     description: "optinal accessories",

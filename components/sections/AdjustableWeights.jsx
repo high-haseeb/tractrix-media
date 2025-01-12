@@ -9,7 +9,8 @@ const AdjustableWeights = () => {
     { title: "Adjustable Weights", price: "1,000", detail: "15lbs-45lbs \n Set of 4", img: "adjustable_weights.webp" },
     ]
     return (
-        <div className='flex flex-col gap-6 mt-6 items-center'>
+        <div className='flex flex-col gap-8 mt-2 items-center'>
+            <div className='text-3xl text-black font-semibold capitalize'>Equipments</div>
         <div className="w-[80%] lg:w-full">
             <Slider/>            
         </div>

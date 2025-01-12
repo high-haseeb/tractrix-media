@@ -1,30 +1,32 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import Card3 from '@/components/ui/Card3';
+import Slider3 from '@/components/ui/Slider3';
 import Image from 'next/image';
-import WoodColorOption from "@/components/ui/WoodColorOption";
 import useColorStore from '@/stores/ColorStore';
 
-const InteriorColor = () => {
-    const { woodColors, activeWoodColor, setActiveWoodColor } = useColorStore();
+
+
+const YogaMats = () => {
+    const {woodColors} = useColorStore();
+    const details=[
+    { title: "Round Station Mat", price: "1,000", detail: "4.5 diameter"},
+    ]
     return (
-        <div className='flex flex-col gap-4 w-full'>
-            <div className='flex flex-col items-center justify-center text-black/50'>
-                <div className='font-light text-base lg:text-xl'>INCLUDED</div>
-                <div className='font-base text-sm lg:text-base capitalize'>Interior Color Options</div>
-                <div className='font-semibold text-lg lg:text-xl capitalize w-full text-center text-black mt-2'>{activeWoodColor}</div>
-            </div>
-            <div className='flex items-center justify-center'>
-                {
-                    woodColors.map((color, idx) => <WoodColorOption title={color.name} value={color.img} active={activeWoodColor} setActive={setActiveWoodColor} key={idx}/>)
-                }
-            </div>
-            <ButtonModal items={woodColors} />
+        <div className='flex flex-col gap-8 mt-2 items-center'>
+            <div className='text-3xl text-black font-semibold capitalize'>Equipments</div>
+        <div className="w-[80%] lg:w-full">
+            <Slider3/>            
+        </div>
+            <Card3 price={"1,000"} name={"Round Station Mat"} details={"4.5 diameter"} />
+            <ButtonModal items={woodColors} details={details[0]} />
         </div>
     )
 }
 
+export default YogaMats;
 
 
-const ButtonModal = ({ items }) => {
+const ButtonModal = ({ items,details }) => {
     const [modalOpen, setModalOpen] = useState(false);
     return (
         <>
@@ -43,7 +45,11 @@ const ButtonModal = ({ items }) => {
                                         <div className='lg:w-40 w-24 h-24 lg:h-40'>
                                             <Image src={item.img} className='w-full h-full object-cover rounded-full' alt='image' width={200} height={200} />
                                         </div>
-                                        <div className='font-bold lg:text-3xl text-lg text-black capitalize'>{item.name}</div>
+                                        <div className='font-semibold lg:text-3xl text-lg text-black capitalize'>{item.name}</div>
+                        <div className='flex flex-col items-center'>
+                            <div className='text-sm '>Round Station Mat</div>
+                            <div className='text-sm '>${details.price}</div>                            
+                        </div>
                                     </div>
                                 ))
                             }
@@ -55,5 +61,3 @@ const ButtonModal = ({ items }) => {
         </>
     )
 }
-
-export default InteriorColor;

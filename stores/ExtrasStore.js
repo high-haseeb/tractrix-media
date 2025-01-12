@@ -4,7 +4,6 @@ const useExtrasStore = create((set) => ({
     extraItems: [
         { title: "misting system", price: "2,500", detail: "On Both Sides" },
         { title: "trailer stabilizer", price: "500", detail: "Four Units" },
-        
     ],
     activeExtraItems: new Set([]),
     totalPriceWeight: 0,
@@ -14,13 +13,19 @@ const useExtrasStore = create((set) => ({
     activeBarbell: 0, 
     pullyPrice: 0,
     barbellWeightPrice: 0, 
+    activeMats: 0,
+    matPrice: 0,
+    barbellState: false,
 
-    setActivePully: (pully) => set(() => ({ activePully: pully })),
+    setActiveMats: (mat) => set(() => ({ activeMats: mat })),
+    setMatPrice: (price) => set(() => ({ matPrice: price })),
+    setActivePully: (pully) => set(() => ({ activePully: pully })), // Fixed redundancy
     setPullyPrice: (price) => set(() => ({ pullyPrice: price })),
     setActiceWeights: (weights) => set(() => ({ activeWeights: weights })),
     setPriceWeights: (price) => set(() => ({ totalPriceWeight: price })),
     setActiveBarbell: (barbell) => set(() => ({ activeBarbell: barbell })), 
     setBarbellPrice: (price) => set(() => ({ barbellWeightPrice: price })), 
+    setBarbellState:(state)=>set(() => ({ barbellState: state })),
 
     addExtraItem: (extra) =>
         set((state) => {
@@ -45,5 +50,6 @@ const useExtrasStore = create((set) => ({
             return { activeExtraItems: updatedSet, totalpriceExtra: newTotal };
         }),
 }));
+
 
 export default useExtrasStore;
