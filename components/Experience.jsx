@@ -39,9 +39,9 @@ const Experience = () => {
                     <Environment environmentIntensity={1.5} preset="city" />
                     <CameraRig />
                     {/* <Stats /> */}
-                    {/* <EffectComposer> */}
-                    {/*     <Bloom luminanceThreshold={1.2}/> */}
-                    {/* </EffectComposer> */}
+                    <EffectComposer>
+                        <Bloom luminanceThreshold={4.0} luminanceSmoothing={0.5} radius={0.0} />
+                    </EffectComposer>
 
                     <Sky />
                 </Canvas>

@@ -86,6 +86,7 @@ export function Trailer(props) {
     }, [activeColor, materials, nodes, activeWoodColor]);
 
     const { activeMovement } = useMovementStore();
+    const lightMaterial = new THREE.MeshPhysicalMaterial({color: "red", emissive: "red", emissiveIntensity: 50.0, clearcoat: 10.0});
 
     return (
         <group ref={group} {...props} dispose={null}>
@@ -102,7 +103,7 @@ export function Trailer(props) {
             <mesh name="walktop034" castShadow receiveShadow geometry={nodes.walktop034.geometry} material={materials['C_Gun_Metal_03.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop041" castShadow receiveShadow geometry={nodes.walktop041.geometry} material={materials['D_Black_Plastic_Dull.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop042" castShadow receiveShadow geometry={nodes.walktop042.geometry} material={materials.Neon_Orange} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-            <mesh name="walktop043" castShadow receiveShadow geometry={nodes.walktop043.geometry} material={materials.D_Tinted_Glass} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+            <mesh name="walktop043" castShadow receiveShadow geometry={nodes.walktop043.geometry} material={lightMaterial} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop045" castShadow receiveShadow geometry={nodes.walktop045.geometry} material={materials['Plastic_01_1.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop046" castShadow receiveShadow geometry={nodes.walktop046.geometry} material={materials['Rubber_Rough_001_Black_50cm.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop047" castShadow receiveShadow geometry={nodes.walktop047.geometry} material={materials['D_Grey_Plastic_Aged.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
