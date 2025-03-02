@@ -19,6 +19,8 @@ const Footer = () => {
         activeBarbell,
         activeMats,
         matPrice,
+        activeMonitor,
+        MonitorPrice
     } = useExtrasStore();
     
     const TextButton = ({ title, action }) => (
@@ -43,8 +45,9 @@ const Footer = () => {
             totalPriceWeight * activeWeights +
             pullyPrice * activePully +
             barbellWeightPrice * activeBarbell + 
-            matPrice * activeMats;
-            
+            matPrice * activeMats +
+            activeMonitor * MonitorPrice;
+
     } else {
         total = Math.round(
             currentVariantValue +
@@ -53,7 +56,8 @@ const Footer = () => {
             (totalPriceWeight * activeWeights) / 72 +
             (pullyPrice * activePully) / 72 +
             (barbellWeightPrice * activeBarbell) / 72 +
-            (matPrice * activeMats) / 72
+            (matPrice * activeMats) / 72 +
+            (activeMonitor * MonitorPrice) / 72
         );
     }
 
@@ -63,7 +67,7 @@ const Footer = () => {
                 activeSectionIndex >= sections.length - 1 ? "" : "shadow shadow-black/80"
             }`}
         >
-            {activeSectionIndex <= 7 ? (
+            {activeSectionIndex <= 8 ? (
                 <>
                     <div>
                         <div className="text-xl lg:text-2xl font-bold">
@@ -106,7 +110,28 @@ const Footer = () => {
                         </div>
                     )}
                 </>
-            ) : activeSectionIndex === 8 ? (
+            ) : activeSectionIndex === 9 ? (
+                <div className="flex items-center gap-4 w-full justify-between">
+                    <button
+                        className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2"
+                        onClick={prevSection}
+                    >
+                        <Image
+                            src={"/icons/left.svg"}
+                            width={30}
+                            height={30}
+                            alt="navigation icon"
+                            className="translate-x-1"
+                        />
+                    </button>
+                    <button
+                        className="bg-black text-white px-8 py-3 font-bold text-sm rounded-full shadow shadow-black/40"
+                        onClick={nextSection}
+                    >
+                        Resver Now
+                    </button>
+                </div>
+            ) : activeSectionIndex === 10 ? (
                 <div className="flex items-center gap-4 w-full justify-between">
                     <button
                         className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2"
@@ -127,7 +152,7 @@ const Footer = () => {
                         Register Now
                     </button>
                 </div>
-            ) : activeSectionIndex === 9 ? (
+            ) : activeSectionIndex === 11 ? (
                 <div className="flex items-center gap-4 w-full justify-between">
                     <button
                         className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2"
@@ -153,7 +178,7 @@ const Footer = () => {
                         />
                     </button>
                 </div>
-            ) : activeSectionIndex === 10 ? (
+            ) : activeSectionIndex === 12 ? (
                 <div className="flex items-center gap-4 w-full justify-between">
                     <button
                         className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2"
@@ -174,7 +199,9 @@ const Footer = () => {
                         Place Your Reservation
                     </button>
                 </div>
-            ):(<></>)}
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

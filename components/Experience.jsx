@@ -43,7 +43,7 @@ const Experience = () => {
                     {/*     <Bloom luminanceThreshold={1.2}/> */}
                     {/* </EffectComposer> */}
 
-                    <Sky />
+                    {/* <Sky /> */}
                 </Canvas>
             </Suspense>
         </div>

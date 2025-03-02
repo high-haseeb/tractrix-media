@@ -24,7 +24,7 @@ const Configurator = () => {
 
     return (
         <div className="w-full h-full flex flex-col items-center justify-between gap-0 relative">
-            {activeSectionIndex <= 7 ? (
+            {activeSectionIndex <= 8 ? (
                 <>
                     <div
                         className="flex flex-col gap-6 w-full h-full overflow-y-scroll px-4 lg:px-20 pb-10 pt-10 lg:pt-20"
@@ -32,32 +32,34 @@ const Configurator = () => {
                         <Title />
                         <Stats />
                         <FinanceOptionSlider />
-                        <Variants />
+                        <Variants/>
                         {sections[activeSectionIndex].component}
                     </div>
                 </>
             ) : (
                 <>
-                    {activeSectionIndex === 8 ? (
+                    {activeSectionIndex === 9 ? (
                         <div
                             ref={scrollableRef} 
                             className="flex flex-col gap-6 w-full h-full overflow-y-scroll px-4 lg:px-20 pb-10 pt-10 lg:pt-20"
                         >
-                            <Title />
-                            <Stats />
+                            {/* <Title />
+                            <Stats /> */}
                             {sections[activeSectionIndex].component}
                         </div>
-                    ) : activeSectionIndex <= 10 ? (
-                        <div ref={scrollableRef} className="flex flex-col gap-6 w-full h-full overflow-y-scroll px-4 lg:px-20 pb-10 pt-10 lg:pt-20">
-                            <Title />
-                            {sections[activeSectionIndex].component}
+                    ) : activeSectionIndex <= 11 ? (
+                        <div ref={scrollableRef} className={`flex flex-col gap-6 w-full h-full overflow-y-scroll px-4 ${activeSectionIndex === 11 ? "lg:px-20":"lg:px-16"} pb-10 pt-10 lg:pt-10 `}>
+                            <div className={`flex flex-col rounded-lg ${activeSectionIndex === 11 ? "":"shadow-lg"} gap-5`}>
+                                <div className="w-full flex justify-center items-center font-bold text-2xl mt-4">{activeSectionIndex === 11 ? "Trailer Uno":"Order Summary"}</div>
+                                {sections[activeSectionIndex].component}
+                            </div>
                         </div>
                     ) : (
                         sections[activeSectionIndex].component
                     )}
                 </>
             )}
-            {activeSectionIndex < 11 ? <Footer /> : <></>}
+            {activeSectionIndex < 11 ? <Footer/> : <></>}
         </div>
     );
 };

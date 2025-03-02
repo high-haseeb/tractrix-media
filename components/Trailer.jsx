@@ -8,16 +8,17 @@ import PullupBar from "@/components/accessories/PullupBar";
 import Dolly from "@/components/accessories/Dolly";
 import { Valut } from "@/components/Valut";
 import { useMovementStore } from '@/stores/stateStore';
-import YogaMat from '@/components/YogaMat';
+import YogaMate from "@/components/accessories/Yogamate"
 // import useExtrasStore from "@/stores/ExtrasStore"
 
 export function Trailer(props) {
     // const [barbel,setBarbel]=useState(false);
+    // console.log(1)
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/trailer.glb')
     const { actions } = useAnimations(animations, group);
     const { colors, activeColor, woodColors, activeWoodColor } = useColorStore();
-    const { activeExtraItems,barbellState} = useExtrasStore();
+    const { activeExtraItems, barbellState, MateState } = useExtrasStore();
 
 
     // useEffect(() => {
@@ -102,8 +103,8 @@ export function Trailer(props) {
             <mesh name="walktop050" castShadow receiveShadow geometry={nodes.walktop050.geometry} material={materials['M_Solar_Cell.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop051" castShadow receiveShadow geometry={nodes.walktop051.geometry} material={materials['speaker_side.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop053" castShadow receiveShadow geometry={nodes.walktop053.geometry} material={materials['fan.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
-            <mesh name="walktop054" castShadow receiveShadow geometry={nodes.walktop054.geometry} material={materials['Logo.001']} rotation={[Math.PI/2 , 0, 0]} scale={0.21} />
-           {/* weights */}
+            <mesh name="walktop054" castShadow receiveShadow geometry={nodes.walktop054.geometry} material={materials['Logo.001']} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
+            {/* weights */}
             <mesh name="walktop062" castShadow receiveShadow geometry={nodes.walktop062.geometry} material={materials.D_Bumpy_Plastic} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop063" castShadow receiveShadow geometry={nodes.walktop063.geometry} material={materials.D_Bumpy_Plastic_1} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
             <mesh name="walktop064" castShadow receiveShadow geometry={nodes.walktop064.geometry} material={materials.D_Bumpy_Plastic_2} rotation={[Math.PI / 2, 0, 0]} scale={0.21} />
@@ -158,12 +159,18 @@ export function Trailer(props) {
                 </>
             }
             <Jack visible={activeMovement.has("trailer jack")} />
-            
             <PullupBar materials={materials} scale={0.02345} />
             <Dolly materials={materials} scale={0.02345} visible={activeMovement.has("trailer dolly")} />
             <Valut scale={0.8} position={[1, 0, 0]} rotation={[0, 0, 0]} visible={activeMovement.has("trailer valet")} />
-            {barbellState && <PullupBar materials={materials} scale={0.02345} position={[8.8,-0.5, 1.5]}/>}
+            {barbellState && <PullupBar materials={materials} scale={0.02345} position={[8.8, -0.5, 1.5]} />}
+            <group scale={MateState ? 1 : 0}>
+                <YogaMate position={[4.2, 0, 6]} scale={2} />
+            </group>
+
+
+            {/* {MateState && <YogaMate position={[5,0,0]} scale={2}/>} */}
             {/* <YogaMat scale={2} position={[5, 1.9, 2.5]}/> */}
+
         </group>
     )
 }

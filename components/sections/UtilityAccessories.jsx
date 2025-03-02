@@ -1,15 +1,40 @@
 import { useState } from 'react'
 import Image from 'next/image';
 import useExtrasStore from "@/stores/ExtrasStore";
+import ButtonModal from '../ui/ButtonModal';
 
 const MovementAccessories = () => {
     const { extraItems, activeExtraItems, addExtraItem, removeExtraItem } = useExtrasStore();
+
+
+    const cardData = [
+       
+        {
+            title: "Enhancing Comfort with Advanced Cooling Technology",
+            subtitle: "Stay Cool in Any Condition",
+            description: "The integrated misting system is designed to provide optimal cooling for participants outside the trailer. Strategically positioned at the center of the two awning doors, it releases a fine mist to lower temperatures and enhance comfort in hot conditions. The water supply is housed within the trailer, ensuring a reliable and efficient system. Additionally, for greater flexibility, portable fanned misters are available and can be placed throughout the outdoor area to provide targeted cooling for individuals engaged in workouts or other activities. This dual-system approach ensures a refreshing and comfortable environment, even in the most demanding conditions.",
+            image: "/acces/1.png"
+        },
+        {
+            title: "Essential Stability for a Secure and Level Trailer",
+            subtitle: "Reliable Trailer Stabilization",
+            description: "A trailer stabilizer is a device that minimizes movement and sway in a parked trailer, ensuring stability and safety. One of the most effective types is the scissor jack, which extends from the trailer’s frame to the ground, providing firm support on various terrains. By preventing unwanted rocking and shifting, scissor jacks enhance comfort and security, making them essential for trailers used as living spaces or workstations.",
+            image: "/acces/2.jpg"
+        },
+        {
+            title: "Starlink Mini: Seamless Connectivity for Streaming and Downloads",
+            subtitle: "Reliable Internet for Your Trailer",
+            description: "To ensure uninterrupted connectivity, we equip our trailers with the Starlink Mini, a compact and powerful satellite internet solution. Our team will provide and professionally install the device on the trailer’s roof, enabling high-speed internet access for seamless content streaming. This allows the TVs inside the trailer to connect to the cloud, broadcasting and downloading work-related classes and other related content in real time. While we supply and install the hardware, monthly subscription fees are not included, and owners are responsible for managing their Starlink service plan directly through Starlink. This setup ensures reliable internet access, keeping trailers and participants connected wherever the trailer is stationed.",
+            image: "/acces/3.jpg"
+        }
+    ];
+    
     return (
         <div className='flex flex-col gap-4 w-full'>
             <div className='flex flex-col items-center justify-center'>
                 <div className='text-3xl text-black font-semibold capitalize'>Accessories</div>
             </div>
-            <div className='flex flex-col items-center justify-center gap-4'>
+            <div className='flex flex-col items-center justify-center gap-3'>
                 {
                     extraItems.map(
                         (item, idx) =>
@@ -17,6 +42,7 @@ const MovementAccessories = () => {
                     )
                 }
             </div>
+            <ButtonModal title={"feature details"} cardData={cardData} left={true}/>
         </div>
     )
 }

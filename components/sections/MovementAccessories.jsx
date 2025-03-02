@@ -18,9 +18,30 @@ const MovementAccessories = () => {
                     )
                 }
             </div>
-            <ButtonModal title={"feature details"} details={movementArray} />
+            <ButtonModal title={"feature details"} details={movementArray} cardData={cardData} />
         </div>
     )
 }
 
 export default MovementAccessories;
+
+const cardData = [
+    {
+        title: "Manual Trailer Dolly",
+        subtitle: "Compact and Versatile Trailer Movement",
+        description: "Move your trailer with ease using the WellBuilt Manual Trailer Dolly. Featuring a sturdy dual-wheel system and ergonomic handle, this dolly provides maximum control and effortless maneuverability. Ideal for tight spaces and quick adjustments, it's the perfect manual solution for hassle-free trailer positioning. Manufactured by WellBuilt Trailers.",
+        image: "/img/dolly.webp"
+    },
+    {
+        title: "Electric Trailer Dolly",
+        subtitle: "Effortless Trailer Positioning",
+        description: "Experience effortless trailer movement with our Electric Trailer Dolly. Equipped with a powerful motor, this dolly allows precise control and smooth maneuverability, making trailer positioning a breeze. Designed and produced by EZ-Tow Systems.",
+        image: "/img/valet.webp"
+    },
+    {
+        title: "Heavy-Duty Trailer Dolly",
+        subtitle: "Designed for Larger Loads",
+        description: "Handle heavy-duty trailers with ease using our robust Heavy-Duty Trailer Dolly. Built with reinforced materials and advanced wheel technology, this dolly ensures maximum stability and strength. Manufactured by PowerHaul Industries.",
+        image: "/img/jack.webp"
+    }
+];
