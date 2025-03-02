@@ -52,6 +52,7 @@ export function Trailer(props) {
         roughnessMap: getTexturePath("ash", "arm.jpg"),
         dispalacementMap: getTexturePath("ash", "disp.jpg"),
     })
+    ashWood.map.repeat.set(4, 4);
     const walnutWood = useTexture({
         map: getTexturePath("walnut", "diff.jpg"),
         roughnessMap: getTexturePath("walnut", "rough.jpg"),
@@ -59,7 +60,13 @@ export function Trailer(props) {
     });
 
     ashWood.map.colorSpace = THREE.SRGBColorSpace;
+    ashWood.map.repeat.set(4, 4);
+    ashWood.map.wrapS = THREE.RepeatWrapping;
+    ashWood.map.wrapT = THREE.RepeatWrapping;
     walnutWood.map.colorSpace = THREE.SRGBColorSpace;
+    walnutWood.map.repeat.set(4, 4);
+    walnutWood.map.wrapS = THREE.RepeatWrapping;
+    walnutWood.map.wrapT = THREE.RepeatWrapping;
 
 
     useEffect(() => {
@@ -162,6 +169,7 @@ export function Trailer(props) {
             <PullupBar materials={materials} scale={0.02345} />
             <Dolly materials={materials} scale={0.02345} visible={activeMovement.has("trailer dolly")} />
             <Valut scale={0.8} position={[1, 0, 0]} rotation={[0, 0, 0]} visible={activeMovement.has("trailer valet")} />
+
             {barbellState && <PullupBar materials={materials} scale={0.02345} position={[8.8, -0.5, 1.5]} />}
             <group scale={MateState ? 1 : 0}>
                 <YogaMate position={[4.2, 0, 6]} scale={2} />
@@ -169,6 +177,7 @@ export function Trailer(props) {
 
 
             {/* {MateState && <YogaMate position={[5,0,0]} scale={2}/>} */}
+
             {/* <YogaMat scale={2} position={[5, 1.9, 2.5]}/> */}
 
         </group>
