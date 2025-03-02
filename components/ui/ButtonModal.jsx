@@ -1,29 +1,14 @@
 'use client';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 
-const ButtonModal = ({ title, details }) => {
-    const [oriant, setOriant] = useState(["lg:flex-row", "w-1/2", "h-full"]);
+const ButtonModal = ({ title,cardData,left}) => {
     const [modalOpen, setModalOpen] = useState(false);
-
-    useEffect(() => {
-        if (
-            details[0]?.title === "Adjustable Weights" ||
-            details[0]?.title === "Adjustable Pulley" ||
-            details[0]?.title === "Barbell and Weights"
-        ) {
-            if(details[0]?.title === "Barbell and Weights")
-            {
-            setOriant(["lg:flex-row flex-col", "w-full", "lg:h-full h-1/2"]);
-                return;
-            }
-            setOriant(["lg:flex-row flex-col", "w-full", "h-full"]);
-            if (details[0]?.title === "Adjustable Pulley") {
-                setOriant(["lg:flex-row flex-col", "w-full", "h-1/2"]);
-            }
-        }
-    }, [details]);
-
+    const [activeCard, setActiveCard] = useState(0);
+    const cardWidth = 45;
+    const cardSpacing = 10;
+    
     return (
         <>
             <div className="w-full flex items-center justify-center">
@@ -34,46 +19,59 @@ const ButtonModal = ({ title, details }) => {
                     {title}
                 </button>
             </div>
+
             {modalOpen && (
-                <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen pointer-events-none bg-black/40 flex items-center justify-center z-50 p-4">
-                    <div
-                        className={`bg-[#E8E8E8] text-[#707070] lg:w-auto w-full h-1/2 rounded-3xl flex ${oriant[0]} pointer-events-auto relative`}
-                    >
-                        <div className={`lg:w-1/2 lg:h-full ${oriant[2]} ${oriant[1]}`}>
-                            <Image
-                                src={`/img/${details[0]?.img}`}
-                                className="w-full h-full object-cover rounded-t-3xl"
-                                alt="image"
-                                width={200}
-                                height={200}
-                            />
-                        </div>
-                        <div className="h-full lg:py-4 p-3 flex flex-col justify-between">
-                            {details.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="flex flex-col justify-center items-start lg:gap-2 gap-1"
+                <div className="fixed top-0 left-0 w-screen h-screen bg-black/40 flex items-center justify-center z-50 p-4">
+                    <div className="w-screen h-screen relative flex justify-center items-center z-[49]">
+                        
+                        <motion.div
+                            className="flex gap-10 transition-all"
+                            animate={{ x: `calc(50vw - ${(activeCard + 0.3) * (cardWidth + cardSpacing)}vw + ${cardWidth / 2}vw)` }}
+                            transition={{ type: "spring", stiffness: 120, damping: 15 }}
+                        >
+                            {cardData.map((card, index) => (
+                                <div 
+                                    key={index} 
+                                    className={`w-[45vw] h-[50vh] bg-white rounded-xl flex relative cursor-pointer shadow-lg transition-all duration-300 ease-in-out ${activeCard === index ? "scale-105 opacity-100" : "scale-100 opacity-80"}`}
+                                    onClick={() => setActiveCard(index)}
                                 >
-                                    <div className="font-bold lg:text-3xl text-lg text-black capitalize">
-                                        {item.title}
+                                    {/* Close Button Inside Each Card */}
+                                    <button 
+                                        className="absolute top-3 right-3 text-black rounded-full w-10 h-10 flex items-center justify-center"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setModalOpen(false);
+                                        }}
+                                    >
+                                        <Image src={'/icons/close.svg'} width={200} height={200} className='w-10 h-10 object-cover'/>
+                                    </button>
+
+                                    <div className='w-1/2 h-full p-10'>
+                                        <Image src={card.image} width={600} height={600} className='w-full h-full object-cover' alt={card.title} />
                                     </div>
-                                    <div className="font-semibold lg:text-xl text-base text-black/80 capitalize">
-                                        {item.price}$
+
+                                    <div className='w-1/2 h-full flex flex-col p-10 gap-2'>
+                                        <div className='font-bold text-2xl'>{card.title}</div>
+                                        <div className='font-semibold text-xl'>{card.subtitle}</div>
+                                        <div className=' text-sm font-light'>{card.description}</div>
                                     </div>
-                                    <div className="font-normal lg:text-lg text-xs text-black/80">
-                                        {item.detail}
+
+                                    {/*Dots */}
+                                    <div className={`absolute ${left ===true ?  "bottom-3 left-52":"bottom-5 left-1/2" } transform -translate-x-1/2 flex gap-3`}>
+                                        {cardData.map((_, dotIndex) => (
+                                            <div 
+                                                key={dotIndex}
+                                                className={`w-5 h-5 rounded-full border border-black cursor-pointer transition-all ${activeCard === dotIndex ? "bg-white scale-125" : "bg-gray-300"}`}
+                                                onClick={(e) => { 
+                                                    e.stopPropagation(); 
+                                                    setActiveCard(dotIndex); 
+                                                }}
+                                            ></div>
+                                        ))}
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                        <Image
-                            src="/icons/close.svg"
-                            width={50}
-                            height={50}
-                            alt="close"
-                            className="cursor-pointer absolute top-4 right-4 w-6 h-6 lg:w-10 lg:h-10"
-                            onClick={() => setModalOpen(false)}
-                        />
+                        </motion.div>
                     </div>
                 </div>
             )}

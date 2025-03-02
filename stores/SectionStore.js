@@ -12,6 +12,8 @@ import ThankUpage from "@/components/sections/ThankUpage";
 import DynamicCard from "@/components/sections/DynamicCard"
 import CardDetails from "@/components/sections/CardDetails";
 import YogaMat from "@/components/sections/YogaMats"
+import HeartRate from "@/components/sections/HeartRate"
+import MemberShipCard from "@/components/sections/MemberShipCard"
 
 const useSectionsStore = create((set, get) => ({
     sections: [
@@ -64,6 +66,12 @@ const useSectionsStore = create((set, get) => ({
             component: <Barbell />,
             default: true
         },
+        {
+            name: "monitor",
+            description: "optinal accessories",
+            component: <HeartRate/>,
+            default: true
+        },
         
         // {
         //     name: "Equipments",
@@ -77,6 +85,14 @@ const useSectionsStore = create((set, get) => ({
         //     component: <CardDetails />,
         //     default: true
         // },
+
+
+        {
+            name: "monitor",
+            description: "optinal accessories",
+            component: <MemberShipCard/>,
+            default: true
+        },
         {
             name: "Card",
             description: "exterior color options",

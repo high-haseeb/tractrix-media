@@ -7,18 +7,32 @@ import MatColorOption from "@/components/ui/MatColorOption";
 
 const Card3 = ({ price, name, details }) => {
     const [checked, setChecked] = useState(false);
-    const { setMatPrice, barbellWeightPrice, setBarbelState, matPrice } = useExtrasStore();
+    const { setMatPrice, barbellWeightPrice, setBarbelState, matPrice ,setMateState,MateState,setMateTexture} = useExtrasStore();
     const { activeMatColor, setActiveMatColor, woodColors } = useColorStore();
+
+    useEffect(()=>{
+        if(activeMatColor==="natural cork"){
+            setMateTexture("/textures/wood/walnut/diff.jpg")
+        }
+        else{
+            setMateTexture("/textures/wood/ash/diff.jpg")
+        }
+    },[activeMatColor])
 
 
     useEffect(() => {
         if (checked) {
             setMatPrice(1000);
+            setMateState(true)
+            console.log(MateState)
         } else {
             setMatPrice(0);
+            setMateState(false)
+            console.log(MateState)
+
         }
-        console.log(matPrice)
-    }, [checked, setMatPrice]);
+        // console.log(matPrice)
+    }, [checked, setMatPrice,setMateState]);
 
     return (
         <div className="flex gap-3 lg:flex-row flex-col">
@@ -26,7 +40,7 @@ const Card3 = ({ price, name, details }) => {
         
             <div className='flex items-center justify-center lg:hidden '>
                 {
-                    woodColors.map((color, idx) => <MatColorOption title={color.name} value={color.img} active={activeMatColor} setActive={setActiveMatColor} key={idx} />)
+                    woodColors.map((color, idx) => <MatColorOption title={color.name} value={color.img_1} active={activeMatColor} setActive={setActiveMatColor} key={idx} />)
                 }
             </div>
 

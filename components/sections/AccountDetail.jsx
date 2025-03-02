@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { ref, set } from 'firebase/database';
 import database from '../../backend/Firebase';
+import useSectionsStore from '@/stores/SectionStore';
+import Image from 'next/image';
 
 function AccountDetail() {
+  const { nextSection, prevSection } = useSectionsStore();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,15 +17,22 @@ function AccountDetail() {
     title: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.email !== formData.confirmEmail) {
+      alert("Emails do not match");
+      return;
+    }
 
-    // Create the data object
+    setIsSubmitting(true);
+
     const userDetails = {
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -31,127 +42,74 @@ function AccountDetail() {
       title: formData.title,
     };
 
-    // Assuming cardDetails come from another component, you would merge them here
-    const cardDetails = {}; // Replace with actual card details data
-
-    const emailRef = formData.email.replace('@', '_').replace('.', '_'); // Using email as the unique key
+    const emailRef = formData.email.replace('@', '_').replace('.', '_');
     const userRef = ref(database, `users/${emailRef}`);
 
-    // Push to Firebase
-    set(userRef, {
-      userDetails,
-      cardDetails,
-    })
-      .then(() => {
-        console.log('Data saved successfully!');
-      })
-      .catch((error) => {
-        console.error('Error saving data:', error);
-      });
+    try {
+      await set(userRef, { userDetails });
+      alert('Submited successfully!');
+      nextSection();
+    } catch (error) {
+      console.error('Error saving data:', error);
+      alert("Error submitting the form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="w-full p-3 border border-gray-300 rounded-lg shadow-md">
+    <div className="w-full p-3 border border-gray-300 rounded-lg relative">
       <div className="text-2xl font-semibold mb-4">Enter Account Details</div>
       <form className="space-y-3" onSubmit={handleSubmit}>
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">First Name</div>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">Last Name</div>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">Email Address</div>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">Confirm Email Address</div>
-          <input
-            type="email"
-            name="confirmEmail"
-            value={formData.confirmEmail}
-            onChange={handleChange}
-            required
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-          <div className="text-xs text-gray-500 mt-1">We won't spam you in any way</div>
-        </div>
-
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">Mobile Phone Number</div>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            required
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">Company Name</div>
-          <input
-            type="text"
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleChange}
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <div className="text-base font-medium mb-1">Title</div>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
-          />
-        </div>
-
+        <InputField label="First Name" name="firstName" value={formData.firstName} onChange={handleChange} required />
+        <InputField label="Last Name" name="lastName" value={formData.lastName} onChange={handleChange} required />
+        <InputField label="Email Address" type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <InputField label="Confirm Email Address" type="email" name="confirmEmail" value={formData.confirmEmail} onChange={handleChange} required />
+        <InputField label="Mobile Phone Number" type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+        <InputField label="Company Name" name="companyName" value={formData.companyName} onChange={handleChange} />
+        <InputField label="Title" name="title" value={formData.title} onChange={handleChange} />
         <div className="text-xs text-gray-600 mt-4 text-center">
           By entering my contact information above, I authorize WellBuilt to contact me about this request and WellBuilt Updates including other WellBuilt products, services, and events. This is not a purchase requirement.
         </div>
-
-        <div className="w-full flex justify-start">
-          <button
-            type="submit"
-            className="py-3 px-5 bg-blue-500 text-white text-xl rounded-lg"
-          >
-            Submit
-          </button>
+        <div className='w-full mt-20 h-[7vh] flex items-end'>
+          <Footer isSubmitting={isSubmitting} prevSection={prevSection} />
         </div>
       </form>
     </div>
   );
 }
+
+const InputField = ({ label, name, type = "text", value, onChange, required }) => (
+  <div className="flex flex-col">
+    <div className="text-base font-medium mb-1">{label}</div>
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      required={required}
+      className="w-full lg:h-12 h-10 px-3 border rounded-md bg-[#E5E5E5]"
+    />
+  </div>
+);
+
+const Footer = ({ isSubmitting, prevSection }) => (
+  <div className="flex w-full justify-between">
+    <button
+      className="bg-black font-bold rounded-full shadow shadow-black/40 flex items-center justify-center p-2"
+      onClick={prevSection}
+      type="button"
+    >
+      <Image src="/icons/left.svg" width={30} height={30} alt="navigation icon" className="translate-x-1" />
+    </button>
+    <button
+      type="submit"
+      className="py-2 px-6 bg-black text-white text-xl rounded-2xl disabled:opacity-50"
+      disabled={isSubmitting}
+    >
+      {isSubmitting ? 'Submitting...' : 'Submit'}
+    </button>
+  </div>
+);
 
 export default AccountDetail;
