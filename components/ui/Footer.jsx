@@ -71,7 +71,7 @@ const Footer = () => {
                 <>
                     <div>
                         <div className="text-xl lg:text-2xl font-bold">
-                            ${total}
+                            ${total.toLocaleString()}
                             <span className="text-xl text-black/80 lg:text-2xl">
                                 {activeFinanceOption === "finance" ? " /mo" : ""}
                             </span>
