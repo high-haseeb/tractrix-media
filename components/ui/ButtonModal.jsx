@@ -1,14 +1,31 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const ButtonModal = ({ title,cardData,left}) => {
+const ButtonModal = ({ title, cardData, left }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [activeCard, setActiveCard] = useState(0);
-    const cardWidth = 45;
-    const cardSpacing = 10;
-    
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const getTranslation = () => {
+        if (isMobile) {
+            const mobileWidths = [215, 47, 65];
+            const cardWidth = mobileWidths[activeCard] || 40;
+            return `calc(50vw - ${(activeCard + 0.3) * (cardWidth + 10)}vw + ${cardWidth / 2}vw)`;
+        }
+        return `calc(50vw - ${(activeCard + 0.3) * (45 + 10)}vw + ${45 / 2}vw)`;
+    };
+
     return (
         <>
             <div className="w-full flex items-center justify-center">
@@ -21,55 +38,62 @@ const ButtonModal = ({ title,cardData,left}) => {
             </div>
 
             {modalOpen && (
-                <div className="fixed top-0 left-0 w-screen h-screen bg-black/40 flex items-center justify-center z-50 p-4">
+                <div className="fixed top-0 left-0 w-screen h-screen bg-black/40 flex items-center justify-center z-[999] p-4">
                     <div className="w-screen h-screen relative flex justify-center items-center z-[49]">
-                        
                         <motion.div
-                            className="flex gap-10 transition-all"
-                            animate={{ x: `calc(50vw - ${(activeCard + 0.3) * (cardWidth + cardSpacing)}vw + ${cardWidth / 2}vw)` }}
-                            transition={{ type: "spring", stiffness: 120, damping: 15 }}
+                            className="flex gap-10 transition-all will-change-transform"
+                            animate={{ x: getTranslation() }}
+                            transition={{ type: "spring", stiffness: 100, mass: 0.5 }}
+                            layout
                         >
                             {cardData.map((card, index) => (
-                                <div 
-                                    key={index} 
-                                    className={`w-[45vw] h-[50vh] bg-white rounded-xl flex relative cursor-pointer shadow-lg transition-all duration-300 ease-in-out ${activeCard === index ? "scale-105 opacity-100" : "scale-100 opacity-80"}`}
+                                <motion.div
+                                    key={index}
+                                    className={`lg:w-[50vw] lg:h-[50vh] w-[80vw] h-[80vh] bg-white rounded-xl flex ${isMobile ? 'flex-col' : 'flex-row'} relative cursor-pointer shadow-lg will-change-transform`}
                                     onClick={() => setActiveCard(index)}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{
+                                        opacity: activeCard === index ? 1 : 0.5,
+                                        scale: activeCard === index ? 1.05 : 1,
+                                    }}
+                                    transition={{ duration: 1, ease: "easeInOut" }}
+                                    layout  
                                 >
                                     {/* Close Button Inside Each Card */}
-                                    <button 
+                                    <button
                                         className="absolute top-3 right-3 text-black rounded-full w-10 h-10 flex items-center justify-center"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             setModalOpen(false);
                                         }}
                                     >
-                                        <Image src={'/icons/close.svg'} width={200} height={200} className='w-10 h-10 object-cover'/>
+                                        <Image src={'/icons/close.svg'} width={200} height={200} className='w-10 h-10 object-cover' />
                                     </button>
 
-                                    <div className='w-1/2 h-full p-10'>
+                                    <div className='lg:w-1/2 w-full lg:h-full h-2/4 lg:p-10 p-3'>
                                         <Image src={card.image} width={600} height={600} className='w-full h-full object-cover' alt={card.title} />
                                     </div>
 
-                                    <div className='w-1/2 h-full flex flex-col p-10 gap-2'>
-                                        <div className='font-bold text-2xl'>{card.title}</div>
-                                        <div className='font-semibold text-xl'>{card.subtitle}</div>
-                                        <div className=' text-sm font-light'>{card.description}</div>
+                                    <div className='lg:w-1/2 w-full h-full flex flex-col lg:p-10 p-3 gap-2'>
+                                        <div className='font-bold lg:text-2xl text-base'>{card.title}</div>
+                                        <div className='font-semibold lg:text-xl text-sm'>{card.subtitle}</div>
+                                        <div className='lg:text-sm text-xs font-light'>{card.description}</div>
                                     </div>
 
-                                    {/*Dots */}
-                                    <div className={`absolute ${left ===true ?  "bottom-3 left-52":"bottom-5 left-1/2" } transform -translate-x-1/2 flex gap-3`}>
+                                    {/* Dots */}
+                                    <div className={`absolute ${left === true ? "bottom-3 left-52" : "bottom-3 left-1/2"} transform -translate-x-1/2 flex gap-3`}>
                                         {cardData.map((_, dotIndex) => (
-                                            <div 
+                                            <div
                                                 key={dotIndex}
                                                 className={`w-5 h-5 rounded-full border border-black cursor-pointer transition-all ${activeCard === dotIndex ? "bg-white scale-125" : "bg-gray-300"}`}
-                                                onClick={(e) => { 
-                                                    e.stopPropagation(); 
-                                                    setActiveCard(dotIndex); 
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setActiveCard(dotIndex);
                                                 }}
                                             ></div>
                                         ))}
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </motion.div>
                     </div>

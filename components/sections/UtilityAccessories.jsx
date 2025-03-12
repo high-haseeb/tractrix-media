@@ -12,7 +12,7 @@ const MovementAccessories = () => {
         {
             title: "Enhancing Comfort with Advanced Cooling Technology",
             subtitle: "Stay Cool in Any Condition",
-            description: "The integrated misting system is designed to provide optimal cooling for participants outside the trailer. Strategically positioned at the center of the two awning doors, it releases a fine mist to lower temperatures and enhance comfort in hot conditions. The water supply is housed within the trailer, ensuring a reliable and efficient system. Additionally, for greater flexibility, portable fanned misters are available and can be placed throughout the outdoor area to provide targeted cooling for individuals engaged in workouts or other activities. This dual-system approach ensures a refreshing and comfortable environment, even in the most demanding conditions.",
+            description: "The integrated misting system cools participants outside the trailer with a fine mist, positioned between the two awning doors. A built-in water supply ensures reliability, while portable fanned misters offer flexible, targeted cooling for workouts or activities, creating a refreshing environment in hot conditions.",
             image: "/acces/1.png"
         },
         {
@@ -24,7 +24,7 @@ const MovementAccessories = () => {
         {
             title: "Starlink Mini: Seamless Connectivity for Streaming and Downloads",
             subtitle: "Reliable Internet for Your Trailer",
-            description: "To ensure uninterrupted connectivity, we equip our trailers with the Starlink Mini, a compact and powerful satellite internet solution. Our team will provide and professionally install the device on the trailer’s roof, enabling high-speed internet access for seamless content streaming. This allows the TVs inside the trailer to connect to the cloud, broadcasting and downloading work-related classes and other related content in real time. While we supply and install the hardware, monthly subscription fees are not included, and owners are responsible for managing their Starlink service plan directly through Starlink. This setup ensures reliable internet access, keeping trailers and participants connected wherever the trailer is stationed.",
+            description: "Our trailers feature the Starlink Mini for reliable satellite internet. Professionally installed on the roof, it enables seamless streaming and real-time content access. While we provide the hardware, owners manage their Starlink service plan separately. This ensures uninterrupted connectivity wherever the trailer is stationed.",
             image: "/acces/3.jpg"
         }
     ];
@@ -42,7 +42,7 @@ const MovementAccessories = () => {
                     )
                 }
             </div>
-            <ButtonModal title={"feature details"} cardData={cardData} left={true}/>
+            <ButtonModal title={"feature details"} cardData={cardData}/>
         </div>
     )
 }

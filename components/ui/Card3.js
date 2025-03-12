@@ -40,7 +40,7 @@ const Card3 = ({ price, name, details }) => {
         
             <div className='flex items-center justify-center lg:hidden '>
                 {
-                    woodColors.map((color, idx) => <MatColorOption title={color.name} value={color.img_1} active={activeMatColor} setActive={setActiveMatColor} key={idx} />)
+                    woodColors.map((color, idx) => <MatColorOption title={color.name} value={color.img} active={activeMatColor} setActive={setActiveMatColor} key={idx} />)
                 }
             </div>
 

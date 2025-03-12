@@ -55,15 +55,15 @@ const ButtonModal = ({ items }) => {
                 </button>
             </div>
             {modalOpen &&
-                <div className='fixed top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 w-screen h-screen bg-black/40 flex items-center justify-center z-[9999]'>
-                    <div className='flex w-[50vw] h-[50vh] rounded-xl bg-white relative'>
+                <div className='fixed top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 w-screen h-screen bg-black/40 flex items-center justify-center z-[99]'>
+                    <div className='flex lg:flex-row flex-col lg:w-[50vw] lg:h-[50vh] w-[80vw] h-[80vh] rounded-xl bg-white relative'>
 
 
                         
-                        <Image src={'/icons/close.svg'}width={200} height={200} className='w-7 h-7 object-cover absolute right-5 top-5 cursor-pointer' onClick={CloseDetails}/>
-                        <div className='w-1/2 h-full p-12 relative'>
+                        <Image src={'/icons/close.svg'}width={200} height={200} className='w-7 h-7 object-cover absolute right-5 top-5 cursor-pointer z-[100]' onClick={CloseDetails}/>
+                        <div className='lg:w-1/2 w-full h-full p-12 relative'>
                             {/* wood name */}
-                            <div className='absolute flex bottom-4 left-1/2 -translate-x-1/2 justify-center items-center'>
+                            <div className='absolute flex bottom-4 left-1/2 -translate-x-1/2 justify-center items-center w-full'>
                                 <div className='font-extrabold'>Color:</div>
                                 {!pressed && <div>Natural Cork</div>}
                                 {pressed && <div>Choclate cork</div>}
@@ -72,22 +72,24 @@ const ButtonModal = ({ items }) => {
 
 
 
-                            {!pressed && <div className='w-12 h-12 bg-black/80 right-16 top-1/2 -translate-y-1/2 rounded-full absolute flex justify-center items-center cursor-pointer' onClick={ImageHandler}>
-                                <Image src={'/icons/right.svg'} width={200} height={200} className='w-7 h-7 object-cover'/>
+                            {!pressed && <div className='lg:w-12 lg:h-12 w-8 h-8 bg-black/80 lg:right-16 right-14 top-1/2 -translate-y-1/2 rounded-full absolute flex justify-center items-center cursor-pointer' onClick={ImageHandler}>
+                                <Image src={'/icons/right.svg'} width={200} height={200} className='lg:w-7 lg:h-7 w-5 h-5 object-cover'/>
                             </div>}
-                            {pressed && <div className='w-12 h-12 bg-black/80 left-16 top-1/2 -translate-y-1/2 rounded-full absolute flex justify-center items-center cursor-pointer' onClick={ImageHandler}>
-                                <Image src={'/icons/left.svg'} width={200} height={200} className='w-7 h-7 object-cover'/>
+                            {pressed && <div className='lg:w-12 lg:h-12 w-8 h-8 bg-black/80 lg:left-16 left-14 top-1/2 -translate-y-1/2 rounded-full absolute flex justify-center items-center cursor-pointer' onClick={ImageHandler}>
+                                <Image src={'/icons/left.svg'} width={200} height={200} className='lg:w-7 lg:h-7 w-5 h-5 object-cover'/>
                             </div>}
                             <Image src={inter} alt='color' width={400} height={200} className='w-full h-full object-cover rounded-full' /> 
                         </div>
-                        <div className='flex flex-col w-1/2 h-full p-10 gap-3'>
-                            <div className='font-bold text-2xl'>
+                        <div className='flex flex-col lg:w-1/2 w-full h-full lg:p-9 p-3 gap-3'>
+                            <div className='font-bold lg:text-2xl text-base'>
                                 Patent-Pending Round Outdoor Station Mats: Luxury, Durability & Performance
                             </div>
-                            <div className='text-base'>
+                            <div className='h-full lg:overflow-hidden overflow-y-scroll'>
+                            <div className='text-sm lg:h-full h-[15vh]'>
                                 Exclusively designed by WellBuilt, our patent-pending round station mats offer a luxurious feel with superior support, hygiene, and durability. Made with a thick, absorbent natural rubber-like closed-cell material, they absorb impact while the patent-pending Engineered Cork Fabric top layer provides a non-slip, antimicrobial surface with a premium texture.
                                 With a 4-ft diameter, these mats ensure a solid grip, heat resistance in the sun, and easy cleaning. Plus, the Engineered Cork Fabric comes in two colors & can be matched exactly to the trailer’s interior, creating a cohesive and stylish aesthetic.
                                 Each set includes four mats for $1,000, delivering both style and functionality for an elevated training experience.
+                            </div>
                             </div>
                         </div>
                     </div>

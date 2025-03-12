@@ -17,7 +17,7 @@ const useColorStore = create((set) => ({
         { name: "red carpet",        hex: "#861B2E" },
         { name: "desert sand",       hex: "#C2B19E" },
     ],
-    activeColor: "matte black",
+    activeColor: "desert sand",
     setActiveColor: (color) => set(() => ({ activeColor: color })),
 
     woodColors: [

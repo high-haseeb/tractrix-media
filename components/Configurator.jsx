@@ -23,7 +23,7 @@ const Configurator = () => {
     }, [activeSectionIndex]);
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-between gap-0 relative">
+        <div className="w-full h-full flex flex-col items-center justify-between gap-0 relative bg-white">
             {activeSectionIndex <= 8 ? (
                 <>
                     <div
