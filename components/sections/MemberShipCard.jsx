@@ -27,39 +27,41 @@ const memberships = [
 
 const MemberShipCard = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const {setMembership , activeMeberShip}=useExtrasStore();
+  const { setMembership } = useExtrasStore();
 
-
-
-  const MemberShipHandler=(index)=>{
-    setActiveIndex(index)
-    setMembership(memberships[index])
-    // console.log(activeMeberShip)
-  }
+  const MemberShipHandler = (index) => {
+    setActiveIndex(index);
+    setMembership(memberships[index]);
+  };
 
   return (
-    <div className="w-full h-full bg-white py-2 px-4 rounded-lg shadow-lg">
-      <h2 className="text-xl font-bold text-center mb-2">Membership</h2>
-      {memberships.map((membership, index) => (
-        <div
-          key={index}
-          onClick={()=>MemberShipHandler(index)}
-          className={`p-4 mb-2 border-4 border-gray-600 rounded-2xl cursor-pointer transition w-full h-[28%] ${
-            activeIndex === index ? "bg-blue-100 border-blue-500" : "bg-gray-200"
-          }`}
-        >
-          <div className="flex justify-between items-center">
-            <h3 className="font-bold">{membership.title}</h3>
-            <span className="text-black font-semibold">{membership.price}</span>
+    <div className="w-full max-w-2xl mx-auto bg-white py-4 px-6 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold text-center mb-4">Membership</h2>
+
+      <div className="flex flex-col gap-4">
+        {memberships.map((membership, index) => (
+          <div
+            key={index}
+            onClick={() => MemberShipHandler(index)}
+            className={`p-5 border-4 rounded-2xl cursor-pointer transition-all w-full 
+            ${activeIndex === index ? "bg-blue-100 border-blue-500 scale-105" : "bg-gray-200 border-gray-600"}
+            hover:scale-105 hover:border-blue-400 focus:ring focus:ring-blue-300`}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+              <h3 className="font-bold text-lg sm:text-xl">{membership.title}</h3>
+              <span className="text-black font-semibold sm:text-lg">{membership.price}</span>
+            </div>
+            <p className="mt-2 text-sm text-gray-700">
+              <span className="font-bold text-black/60">{membership.highlight}</span>
+              <br />
+              {membership.description}
+            </p>
           </div>
-          <p className="mt-2 text-sm text-gray-700 flex flex-col gap-2">
-            <span className="font-bold text-black/40">{membership.highlight}</span>
-            <span>{membership.description}</span>
-          </p>
-        </div>
-      ))}
-      <p className="text-base text-black font-bold text-center">
-        Monthly membership payments will begin upon delivery of your Trailer.
+        ))}
+      </div>
+
+      <p className="text-base text-black font-bold text-center mt-4">
+        Monthly membership payments will begin upon delivery of your trailer.
       </p>
     </div>
   );

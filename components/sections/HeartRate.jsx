@@ -173,7 +173,7 @@ const Card2 = ({ imgSrc, price, name, details }) => {
 
 
 
-const ButtonModal = () => {
+const ButtonModal = ({ items }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     const CloseDetails=()=>{
@@ -188,18 +188,24 @@ const ButtonModal = () => {
                 </button>
             </div>
             {modalOpen &&
-                <div className='fixed top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 w-screen h-screen bg-black/40 flex items-center justify-center z-[9999]'>
-                    <div className='flex w-[50vw] h-[50vh] rounded-xl bg-white relative'>
-                        <Image src={'/icons/close.svg'}width={200} height={200} className='w-7 h-7 object-cover absolute right-5 top-5 cursor-pointer' onClick={CloseDetails}/>
-                        <div className='w-1/2 h-full p-10 relative'>
-                            <Image src={'/img/puls.jpg'} alt='color' width={400} height={200} className='w-full h-full object-cover'/> 
+                <div className='fixed top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 w-screen h-screen bg-black/40 flex items-center justify-center z-[99]'>
+                    <div className='flex lg:flex-row flex-col lg:w-[50vw] lg:h-[50vh] w-[80vw] h-[80vh] rounded-xl bg-white relative'>
+                        <Image src={'/icons/close.svg'}width={200} height={200} className='w-7 h-7 object-cover absolute right-5 top-5 cursor-pointer z-[100]' onClick={CloseDetails}/>
+                        <div className='lg:w-1/2 w-full h-full p-5 relative'>
+                            <Image src={'/img/puls.jpg'} alt='color' width={400} height={200} className='w-full h-full object-cover' /> 
                         </div>
-                        <div className='flex flex-col w-1/2 h-full py-6 pr-6 gap-3'>
-                            <div className='font-bold text-3xl w-[90%]'>
+                        <div className='flex flex-col lg:w-1/2 w-full h-full lg:p-5 p-3 gap-3'>
+                            <div className='font-bold lg:text-3xl text-xl'>
+                                {/* Patent-Pending Adjustable Weight: Exclusive to WellBuilt */} 
+                                {/* Adjustable Weightless Pulley Machine: Innovative Resistance Training */}
+                                {/* Barbell with Weights: Full-Range Strength Training Anywhere */}
                                 Garmin Heart Rate Monitors & Receivers: Real-Time Performance Tracking
+
                             </div>
-                            <div className=''>
-                                To enhance training and performance analysis, we offer Garmin heart rate monitors and receivers, designed to track real-time heart rate data and sync seamlessly with the leaderboard system. These monitors can be comfortably worn on the wrist or arm, providing accurate insights into each participant’s workout intensity. The system ensures precise performance tracking, helping users optimize their training and reach their fitness goals. Each set includes four monitors for $400, making it an essential tool for those looking to elevate their workouts with professional-grade monitoring and data integration.
+                            <div className='lg:overflow-hidden h-full overflow-y-scroll'>
+                            <div className='lg:text-base text-xs lg:h-full h-[25vh]'>
+                                To enhance training and performance analysis, we offer Garmin heart rate monitors and receivers, designed to track real-time heart rate data and sync seamlessly with the leaderboard system. These monitors can be comfortably worn on the wrist or arm, providing accurate insights into each participant’s workout intensity. The system ensures precise performance tracking, helping users optimize their training and reach their fitness goals. Each set includes four monitors for $400, making it an essential tool for those looking to elevate their workouts with professional-grade monitoring and data integration.                               
+                            </div>
                             </div>
                         </div>
                     </div>
