@@ -6,7 +6,7 @@ import useExtrasStore from "@/stores/ExtrasStore"
 const Card = ({ imgSrc, price, name, details }) => {
     const [checked, setChecked] = useState(false);
     const {setPriceWeights}=useExtrasStore()
-    console.log(checked)
+    // console.log(checked)
     useEffect(()=>{
         if(checked){
             setPriceWeights(1000)

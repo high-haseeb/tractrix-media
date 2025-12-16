@@ -10,7 +10,7 @@ const CardOption = ({ title, price, img, detail, checked, horizontal = false, on
                 () => {
                     setSelected(s => !s);
                     !selected ? onCheck(title) : onUncheck(title);
-                    console.log(title,price)
+                    // console.log(title,price)
                 }}
         >
             <div className='bg-black/20 rounded-xl absolute w-8 h-8 right-4 top-4 flex items-center justify-center'>

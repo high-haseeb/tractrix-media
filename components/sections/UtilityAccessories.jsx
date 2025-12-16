@@ -54,7 +54,7 @@ const CardOption = ({ title, price, detail, onCheck, onUncheck, checked }) => {
                 () => {
                     setSelected(s => !s);
                     !selected ? onCheck(title) : onUncheck(title);
-                    console.log(title,price)
+                    // console.log(title,price)
                 }}
         >
             <div className='flex gap-4'>

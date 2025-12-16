@@ -16,7 +16,7 @@ const HeartRate = () => {
         <div className="w-[80%] lg:w-full">
             <Slider2/>
         </div>
-            <Card2 imgSrc={() => <Image src={"/img/puls.jpg "} width={200} height={200} alt='adjustable_pulley' className='w-24 h-auto'/>} price={"400"} name={"Heart-Rate Monitor"} details={"Pulse Tracker\n Set of 4"} />
+            <Card2 imgSrc={() => <Image src={"/img/puls.jpg"} width={200} height={200} alt='adjustable_pulley' className='w-24 h-auto'/>} price={"400"} name={"Heart-Rate Monitor"} details={"Pulse Tracker\n Set of 4"} />
             <ButtonModal title={'Feature Details'} details={details} />
         </div>
     )

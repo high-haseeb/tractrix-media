@@ -216,11 +216,11 @@ const DynamicCard = () => {
           <div className="w-full flex justify-center items-center lg:text-xl text-base text-black/40">Every Trailer Uno Purchase Includes</div>
           <div className="flex lg:flex-row flex-col w-ful gap-4">
               <div className="lg:w-1/2 w-full flex border-2 items-center rounded-2xl border-black bg-white p-2 gap-2">
-                  <Image src={'/icons/clock.svg'}  width={200} height={200} className="w-10 h-10 object-cover"/>
+                  <Image src={'/icons/clock.svg'}  width={200} height={200} className="w-10 h-10 object-cover" alt="t"/>
                   <div className="font-bold text-black text-sm">60 Months Limited Warranty</div>
               </div>
               <div className="lg:w-1/2 w-full flex border-2 items-center rounded-2xl border-black bg-white p-2 gap-2">
-                <Image src={'/icons/settings.svg'}  width={200} height={200} className="w-10 h-10 object-cover"/>
+                <Image src={'/icons/settings.svg'}  width={200} height={200} className="w-10 h-10 object-cover" alt="t"/>
                 <div className="font-bold text-black text-base">Setup and Delivery</div>
               </div>
           </div>

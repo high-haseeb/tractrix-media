@@ -24,12 +24,11 @@ const Card3 = ({ price, name, details }) => {
         if (checked) {
             setMatPrice(1000);
             setMateState(true)
-            console.log(MateState)
+            // console.log(MateState)
         } else {
             setMatPrice(0);
             setMateState(false)
-            console.log(MateState)
-
+            // console.log(MateState)
         }
         // console.log(matPrice)
     }, [checked, setMatPrice,setMateState]);
